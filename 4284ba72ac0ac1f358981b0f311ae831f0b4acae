@@ -1,0 +1,182 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da9b358b_03ad0ee9",
+        "filename": "src/application/Main.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1007635
+      },
+      "writtenOn": "2016-03-30T20:55:33Z",
+      "side": 1,
+      "message": "I guess it is width",
+      "range": {
+        "startLine": 22,
+        "startChar": 26,
+        "endLine": 22,
+        "endChar": 32
+      },
+      "revId": "4284ba72ac0ac1f358981b0f311ae831f0b4acae",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da9b358b_033f4eb5",
+        "filename": "src/application/Ships.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1007635
+      },
+      "writtenOn": "2016-03-30T20:55:33Z",
+      "side": 1,
+      "message": "define this",
+      "range": {
+        "startLine": 102,
+        "startChar": 26,
+        "endLine": 102,
+        "endChar": 27
+      },
+      "revId": "4284ba72ac0ac1f358981b0f311ae831f0b4acae",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da9b358b_e34b4a58",
+        "filename": "src/application/Ships.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1007635
+      },
+      "writtenOn": "2016-03-30T20:55:33Z",
+      "side": 1,
+      "message": "define this",
+      "range": {
+        "startLine": 107,
+        "startChar": 26,
+        "endLine": 107,
+        "endChar": 27
+      },
+      "revId": "4284ba72ac0ac1f358981b0f311ae831f0b4acae",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da9b358b_a374229c",
+        "filename": "src/application/Ships.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1007635
+      },
+      "writtenOn": "2016-03-30T20:55:33Z",
+      "side": 1,
+      "message": "define this",
+      "range": {
+        "startLine": 113,
+        "startChar": 20,
+        "endLine": 113,
+        "endChar": 21
+      },
+      "revId": "4284ba72ac0ac1f358981b0f311ae831f0b4acae",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da9b358b_636e1acb",
+        "filename": "src/application/Ships.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1007635
+      },
+      "writtenOn": "2016-03-30T20:55:33Z",
+      "side": 1,
+      "message": "define this",
+      "range": {
+        "startLine": 161,
+        "startChar": 36,
+        "endLine": 161,
+        "endChar": 37
+      },
+      "revId": "4284ba72ac0ac1f358981b0f311ae831f0b4acae",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da9b358b_437316b2",
+        "filename": "src/application/Ships.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1007635
+      },
+      "writtenOn": "2016-03-30T20:55:33Z",
+      "side": 1,
+      "message": "define this",
+      "range": {
+        "startLine": 177,
+        "startChar": 36,
+        "endLine": 177,
+        "endChar": 37
+      },
+      "revId": "4284ba72ac0ac1f358981b0f311ae831f0b4acae",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da9b358b_83a0fef5",
+        "filename": "src/application/Ships.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1007635
+      },
+      "writtenOn": "2016-03-30T20:55:33Z",
+      "side": 1,
+      "message": "magic numbers!",
+      "revId": "4284ba72ac0ac1f358981b0f311ae831f0b4acae",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da9b358b_23b01243",
+        "filename": "src/application/Ships.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 866,
+      "author": {
+        "id": 1007635
+      },
+      "writtenOn": "2016-03-30T20:55:33Z",
+      "side": 1,
+      "message": "should be named as xPosition, xPos or smth like this",
+      "range": {
+        "startLine": 866,
+        "startChar": 48,
+        "endLine": 866,
+        "endChar": 49
+      },
+      "revId": "4284ba72ac0ac1f358981b0f311ae831f0b4acae",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
