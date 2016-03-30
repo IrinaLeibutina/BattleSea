@@ -47,11 +47,11 @@ public class Ships {
     Pane shipsAndField = new Pane();
     Scene scene3 = new Scene(shipsAndField, WEIGHT, HEIGHT);
     // Create image for background
-    Image imgage = new Image(getClass().getResourceAsStream("Fon.jpg"));
-    ImageView img5 = new ImageView(imgage);
-    img5.setFitHeight(HEIGHT);
-    img5.setFitWidth(WEIGHT);
-    shipsAndField.getChildren().add(img5);
+    Image background = new Image(getClass().getResourceAsStream("Fon.jpg"));
+    ImageView ground = new ImageView(background);
+    ground.setFitHeight(HEIGHT);
+    ground.setFitWidth(WEIGHT);
+    shipsAndField.getChildren().add(ground);
     // Create field
     Button[][] ship = new Button[SIZE][SIZE];
     for (int i = 0; i < SIZE; i++) {
@@ -84,13 +84,13 @@ public class Ships {
     choice.setOpacity(0.5);
     choice.setLayoutX(750);
     choice.setLayoutY(550);
-    FillTransition st = new FillTransition(Duration.seconds(0.5), choice);
+    FillTransition transition = new FillTransition(Duration.seconds(0.5), choice);
     choice.setOnMouseEntered(event2 -> {
-      st.setFromValue(Color.YELLOW);
-      st.setToValue(Color.CORNSILK);
-      st.setCycleCount(Animation.INDEFINITE);
-      st.setAutoReverse(true);
-      st.play();
+      transition.setFromValue(Color.YELLOW);
+      transition.setToValue(Color.CORNSILK);
+      transition.setCycleCount(Animation.INDEFINITE);
+      transition.setAutoReverse(true);
+      transition.play();
     });
     choice.setOnMouseExited(event3 -> {
       st.stop();
@@ -249,7 +249,7 @@ public class Ships {
       symbols[i] = new Button();
       double shift = 1.8 + i;
       char[] name = new char[SIZE];
-      name[0] = 'A';  // Create russian symbols
+      name[0] = 'A'; // Create russian symbols
       name[1] = 'Á';
       name[2] = 'Â';
       name[3] = 'Ã';

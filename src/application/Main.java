@@ -25,11 +25,11 @@ public class Main extends Application {
   public void start(Stage primaryStage) {
     Pane root = new Pane();
     // Create image for the background
-    Image image = new Image(getClass().getResourceAsStream("Ship.jpg"));
-    ImageView img = new ImageView(image);
-    img.setFitHeight(610);
-    img.setFitWidth(910);
-    root.getChildren().add(img);
+    Image background = new Image(getClass().getResourceAsStream("Ship.jpg"));
+    ImageView ground = new ImageView(background);
+    ground.setFitHeight(610);
+    ground.setFitWidth(910);
+    root.getChildren().add(ground);
 
     // Create button for menu
     MenuItem newGame = new MenuItem("ÍÎÂÀß ÈÃÐÀ");
@@ -56,16 +56,16 @@ public class Main extends Application {
     ft.play();
     menuBox.setVisible(true);
     // Create image for the background of window
-    Image image1 = new Image(getClass().getResourceAsStream("1.jpg"));
-    ImageView img1 = new ImageView(image1);
-    img1.setLayoutX(750);
-    img1.setFitHeight(140);
-    img1.setFitWidth(140);
-    root.getChildren().add(img1);
+    Image background = new Image(getClass().getResourceAsStream("1.jpg"));
+    ImageView ground = new ImageView(background);
+    ground.setLayoutX(750);
+    ground.setFitHeight(140);
+    ground.setFitWidth(140);
+    root.getChildren().add(ground);
 
-    Image image2 = new Image(getClass().getResourceAsStream("5.gif"));
+    Image background2 = new Image(getClass().getResourceAsStream("5.gif"));
     primaryStage.setTitle("Ìîðñêîé áîé");
-    primaryStage.getIcons().add(image2);
+    primaryStage.getIcons().add(background2);
     primaryStage.setScene(scene);
 
     // Rule of game
@@ -88,18 +88,17 @@ public class Main extends Application {
     primaryStage.show();
   }
 
-  
-  public void createRule(Stage primaryStage, Scene scene){
+  public void createRule(Stage primaryStage, Scene scene) {
     Pane root1 = new Pane();
 
     Scene scene1 = new Scene(root1, 794, 563);
     primaryStage.setScene(scene1);
     // Create image for background
-    Image image3 = new Image(getClass().getResourceAsStream("img.png"));
-    ImageView img3 = new ImageView(image3);
-    img3.setFitHeight(HEIGHT);
-    img3.setFitWidth(WEIGHT);
-    root1.getChildren().add(img3);
+    Image background = new Image(getClass().getResourceAsStream("img.png"));
+    ImageView ground = new ImageView(background);
+    ground.setFitHeight(HEIGHT);
+    ground.setFitWidth(WEIGHT);
+    root1.getChildren().add(ground);
 
     Rectangle comeBack = new Rectangle(130, 25, Color.DARKSALMON);
     comeBack.setOpacity(0.5);
@@ -152,6 +151,7 @@ public class Main extends Application {
       primaryStage.setScene(scene);
     });
   }
+
   private static class MenuItem extends StackPane {
     public MenuItem(String name) {
       Rectangle choice = new Rectangle(200, 25, Color.DARKSALMON);

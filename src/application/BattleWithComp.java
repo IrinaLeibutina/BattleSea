@@ -46,36 +46,35 @@ public class BattleWithComp extends Ships {
 
   public void createBattle(Stage primaryStage) {
     Pane battle = new Pane();
-    Scene scene4 = new Scene(battle, WEIGHT, HEIGHT);
+    Scene scene = new Scene(battle, WEIGHT, HEIGHT);
 
     // Create Image
-    Image imgage = new Image(getClass().getResourceAsStream("Fon.jpg"));
-    ImageView img5 = new ImageView(imgage);
-    img5.setFitHeight(HEIGHT);
-    img5.setFitWidth(WEIGHT);
-    battle.getChildren().add(img5);
+    Image background = new Image(getClass().getResourceAsStream("Fon.jpg"));
+    ImageView ground = new ImageView(background);
+    ground.setFitHeight(HEIGHT);
+    ground.setFitWidth(WEIGHT);
+    battle.getChildren().add(ground);
 
     // Create button to return
-    Rectangle bg1 = new Rectangle(130, 25, Color.DARKSALMON);
-    bg1.setOpacity(0.5);
-    bg1.setLayoutX(750);
-    bg1.setLayoutY(550);
-    FillTransition st = new FillTransition(Duration.seconds(0.5), bg1);
-    bg1.setOnMouseEntered(event2 -> {
-      st.setFromValue(Color.YELLOW);
-      st.setToValue(Color.CORNSILK);
-      st.setCycleCount(Animation.INDEFINITE);
-      st.setAutoReverse(true);
-      st.play();
+    Rectangle back = new Rectangle(130, 25, Color.DARKSALMON);
+    back.setOpacity(0.5);
+    back.setLayoutX(750);
+    back.setLayoutY(550);
+    FillTransition transition = new FillTransition(Duration.seconds(0.5), back);
+    back.setOnMouseEntered(event2 -> {
+      transition.setFromValue(Color.YELLOW);
+      transition.setToValue(Color.CORNSILK);
+      transition.setCycleCount(Animation.INDEFINITE);
+      transition.setAutoReverse(true);
+      transition.play();
     });
-    bg1.setOnMouseExited(event3 -> {
+    back.setOnMouseExited(event3 -> {
       st.stop();
-      bg1.setFill(Color.DARKSALMON);
+      back.setFill(Color.DARKSALMON);
     });
-    bg1.setOnMouseClicked(event1 -> {
-      Main m = new Main();
-      m.start(primaryStage);
-
+    back.setOnMouseClicked(event1 -> {
+      Main back = new Main();
+      back.start(primaryStage);
     });
 
     Text text = new Text("НАЗАД");
@@ -83,7 +82,7 @@ public class BattleWithComp extends Ships {
     text.setFont(Font.font("Arial", FontPosture.ITALIC, 16));
     text.setLayoutX(785);
     text.setLayoutY(568);
-    battle.getChildren().addAll(text, bg1);
+    battle.getChildren().addAll(text, back);
 
     // Create field for text
     Rectangle textFiel1 = new Rectangle(330, 150, Color.DARKSALMON);
@@ -96,7 +95,7 @@ public class BattleWithComp extends Ships {
     b.fieldName(battle);
     battle(battle);
 
-    primaryStage.setScene(scene4);
+    primaryStage.setScene(scene);
     primaryStage.show();
   }
 
@@ -145,11 +144,11 @@ public class BattleWithComp extends Ships {
                 if (boat1 == 0 && battleship1 == 0 && cruiser1 == 0 && destroyer1 == 0) {
                   System.out.println("First");
                   win.setText("Компьютер победил!!!");
-                  Image imgage = new Image(getClass().getResourceAsStream("Fon.jpg"));
-                  ImageView img5 = new ImageView(imgage);
-                  img5.setFitHeight(HEIGHT);
-                  img5.setFitWidth(WEIGHT);
-                  battle.getChildren().addAll(img5, win);
+                  Image background = new Image(getClass().getResourceAsStream("Fon.jpg"));
+                  ImageView ground = new ImageView(background);
+                  ground.setFitHeight(HEIGHT);
+                  ground.setFitWidth(WEIGHT);
+                  battle.getChildren().addAll(ground, win);
                   return;
                 }
                 second = false;
@@ -174,11 +173,11 @@ public class BattleWithComp extends Ships {
             if (boat2 == 0 && battleship2 == 0 && cruiser2 == 0 && destroyer2 == 0) {
               System.out.println("Second");
               win.setText("Игрок Победил!!!");
-              Image imgage = new Image(getClass().getResourceAsStream("Fon.jpg"));
-              ImageView img5 = new ImageView(imgage);
-              img5.setFitHeight(HEIGHT);
-              img5.setFitWidth(WEIGHT);
-              battle.getChildren().addAll(img5, win);
+              Image background = new Image(getClass().getResourceAsStream("Fon.jpg"));
+              ImageView ground = new ImageView(background);
+              ground.setFitHeight(HEIGHT);
+              ground.setFitWidth(WEIGHT);
+              battle.getChildren().addAll(ground, win);
               return;
             }
             SecureRandom rand = new SecureRandom();

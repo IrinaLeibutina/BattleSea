@@ -29,7 +29,7 @@ public class Battle extends Ships {
   public int battleship2 = 1;
   public int cruiser2 = 2;
   public int destroyer2 = 3;
-  public int Boat2 = 4;
+  public int boat2 = 4;
   public static int[][] newCheck = new int[SIZE][SIZE];
   Button[][] field = new Button[SIZE][SIZE];
 
@@ -46,11 +46,11 @@ public class Battle extends Ships {
     Scene scene4 = new Scene(battle, WEIGHT, HEIGHT);
 
     // Create Image
-    Image imgage = new Image(getClass().getResourceAsStream("Fon.jpg"));
-    ImageView img5 = new ImageView(imgage);
-    img5.setFitHeight(HEIGHT);
-    img5.setFitWidth(WEIGHT);
-    battle.getChildren().add(img5);
+    Image background = new Image(getClass().getResourceAsStream("Fon.jpg"));
+    ImageView ground = new ImageView(background);
+    ground.setFitHeight(HEIGHT);
+    ground.setFitWidth(WEIGHT);
+    battle.getChildren().add(ground);
 
     // Create button to return
     Rectangle bg1 = new Rectangle(130, 25, Color.DARKSALMON);
@@ -92,12 +92,12 @@ public class Battle extends Ships {
   public void fieldName(Pane battle) {
     Button[] symbols = new Button[SIZE];
     Button[] numbers = new Button[SIZE + 1];
-    Button[] symbols2 = new Button[SIZE];
-    Button[] numbers2 = new Button[SIZE + 1];
+    Button[] symbolsSecond = new Button[SIZE];
+    Button[] numbersSecond = new Button[SIZE + 1];
     // Part for symbols
     for (int i = 0; i < SIZE; i++) {
       symbols[i] = new Button();
-      symbols2[i] = new Button();
+      symbolsSecond[i] = new Button();
       double shift = 1.5 + i;
       char[] name = new char[SIZE];
       name[0] = 'A'; // Russian symbols
@@ -117,18 +117,18 @@ public class Battle extends Ships {
       symbols[i].setLayoutX(15);
       symbols[i].setStyle("-fx-base: lightblue");
       symbols[i].setLayoutY(30 * shift);
-      symbols2[i].setText(valueOfchar);
-      symbols2[i].setMinSize(30, 30);
-      symbols2[i].setLayoutX(515);
-      symbols2[i].setStyle("-fx-base: lightblue");
-      symbols2[i].setLayoutY(30 * shift);
-      battle.getChildren().addAll(symbols[i], symbols2[i]);
+      symbolsSecond[i].setText(valueOfchar);
+      symbolsSecond[i].setMinSize(30, 30);
+      symbolsSecond[i].setLayoutX(515);
+      symbolsSecond[i].setStyle("-fx-base: lightblue");
+      symbolsSecond[i].setLayoutY(30 * shift);
+      battle.getChildren().addAll(symbols[i], symbolsSecond[i]);
     }
 
     // Part for numbers
     for (int i = 0; i < 11; i++) {
       numbers[i] = new Button();
-      numbers2[i] = new Button();
+      numbersSecond[i] = new Button();
       double shift = i + 0.5;
       char[] name = new char[11];
       name[0] = ' ';
@@ -147,20 +147,20 @@ public class Battle extends Ships {
       if (i != 10) {
         String valueOfchar = String.valueOf(name[i]);
         numbers[i].setText(valueOfchar);
-        numbers2[i].setText(valueOfchar);
+        numbersSecond[i].setText(valueOfchar);
       } else {
         numbers[10].setText("10");
-        numbers2[10].setText("10");
+        numbersSecond[10].setText("10");
       }
       numbers[i].setMinSize(30, 30);
       numbers[i].setStyle("-fx-base: lightblue");
       numbers[i].setLayoutY(15);
       numbers[i].setLayoutX(30 * shift);
-      numbers2[i].setMinSize(30, 30);
-      numbers2[i].setStyle("-fx-base: lightblue");
-      numbers2[i].setLayoutY(15);
-      numbers2[i].setLayoutX(30 * shift + 500);
-      battle.getChildren().addAll(numbers[i], numbers2[i]);
+      numbersSecond[i].setMinSize(30, 30);
+      numbersSecond[i].setStyle("-fx-base: lightblue");
+      numbersSecond[i].setLayoutY(15);
+      numbersSecond[i].setLayoutX(30 * shift + 500);
+      battle.getChildren().addAll(numbers[i], numbersSecond[i]);
     }
   }
 
@@ -209,11 +209,11 @@ public class Battle extends Ships {
 
                 if (boat1 == 0 && battleship1 == 0 && cruiser1 == 0 && destroyer1 == 0) {
                   win.setText("Второй Игрок Победил!!!");
-                  Image imgage = new Image(getClass().getResourceAsStream("Fon.jpg"));
-                  ImageView img5 = new ImageView(imgage);
-                  img5.setFitHeight(HEIGHT);
-                  img5.setFitWidth(WEIGHT);
-                  battle.getChildren().addAll(img5, win);
+                  Image background = new Image(getClass().getResourceAsStream("Fon.jpg"));
+                  ImageView ground = new ImageView(background);
+                  ground.setFitHeight(HEIGHT);
+                  ground.setFitWidth(WEIGHT);
+                  battle.getChildren().addAll(ground, win);
                   return;
                 }
 
@@ -237,13 +237,13 @@ public class Battle extends Ships {
 
         secondField[i][j].setOnMouseClicked(event11 -> {
           if (second) {
-            if (Boat2 == 0 && battleship2 == 0 && cruiser2 == 0 && destroyer2 == 0) {
+            if (boat2 == 0 && battleship2 == 0 && cruiser2 == 0 && destroyer2 == 0) {
               win.setText("Первый Игрок Победил!!!");
-              Image imgage = new Image(getClass().getResourceAsStream("Fon.jpg"));
-              ImageView img5 = new ImageView(imgage);
-              img5.setFitHeight(HEIGHT);
-              img5.setFitWidth(WEIGHT);
-              battle.getChildren().addAll(img5, win);
+              Image background = new Image(getClass().getResourceAsStream("Fon.jpg"));
+              ImageView ground = new ImageView(background);
+              ground.setFitHeight(HEIGHT);
+              ground.setFitWidth(WEIGHT);
+              battle.getChildren().addAll(ground, win);
               return;
             }
             newCheck = checkForShipSecond;
@@ -255,7 +255,7 @@ public class Battle extends Ships {
                 second = true;
                 first = true;
                 field = secondField;
-                Boat2 = boatCheck(field, x, y, Boat2); // Boat
+                boat2 = boatCheck(field, x, y, boat2); // Boat
                 battleship2 = destroyerCheck(field, x, y, destroyer2); // Destroyer
                 cruiser2 = cruiserCheck(field, x, y, cruiser2); // Cruiser
                 destroyer2 = battleshipCheck(field, x, y, battleship2); // Battleship
