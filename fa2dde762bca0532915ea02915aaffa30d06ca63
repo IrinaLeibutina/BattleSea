@@ -1,0 +1,186 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da9b358b_80d59444",
+        "filename": "src/application/Battle.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1007785
+      },
+      "writtenOn": "2016-03-30T19:25:33Z",
+      "side": 1,
+      "message": "Not \"img5\", backgroundImage or smth like that",
+      "range": {
+        "startLine": 50,
+        "startChar": 3,
+        "endLine": 52,
+        "endChar": 29
+      },
+      "revId": "fa2dde762bca0532915ea02915aaffa30d06ca63",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da9b358b_e09fc05d",
+        "filename": "src/application/Battle.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1007785
+      },
+      "writtenOn": "2016-03-30T19:25:33Z",
+      "side": 1,
+      "message": "bad variable name",
+      "range": {
+        "startLine": 95,
+        "startChar": 0,
+        "endLine": 96,
+        "endChar": 45
+      },
+      "revId": "fa2dde762bca0532915ea02915aaffa30d06ca63",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da9b358b_40878c0f",
+        "filename": "src/application/BattleWithComp.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1007785
+      },
+      "writtenOn": "2016-03-30T19:25:33Z",
+      "side": 1,
+      "message": "bad variable name",
+      "revId": "fa2dde762bca0532915ea02915aaffa30d06ca63",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da9b358b_207da81c",
+        "filename": "src/application/BattleWithComp.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1007785
+      },
+      "writtenOn": "2016-03-30T19:25:33Z",
+      "side": 1,
+      "message": "bad variable name",
+      "revId": "fa2dde762bca0532915ea02915aaffa30d06ca63",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da9b358b_e076a03d",
+        "filename": "src/application/BattleWithComp.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1007785
+      },
+      "writtenOn": "2016-03-30T19:25:33Z",
+      "side": 1,
+      "message": "bad variable name",
+      "revId": "fa2dde762bca0532915ea02915aaffa30d06ca63",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da9b358b_c0739c4c",
+        "filename": "src/application/BattleWithComp.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1007785
+      },
+      "writtenOn": "2016-03-30T19:25:33Z",
+      "side": 1,
+      "message": "bad variable name",
+      "revId": "fa2dde762bca0532915ea02915aaffa30d06ca63",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da9b358b_409e6c57",
+        "filename": "src/application/BattleWithComp.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1007785
+      },
+      "writtenOn": "2016-03-30T19:25:33Z",
+      "side": 1,
+      "message": "bad variable name",
+      "revId": "fa2dde762bca0532915ea02915aaffa30d06ca63",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da9b358b_20a488a4",
+        "filename": "src/application/Main.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1007785
+      },
+      "writtenOn": "2016-03-30T19:25:33Z",
+      "side": 1,
+      "message": "backgroundImage",
+      "revId": "fa2dde762bca0532915ea02915aaffa30d06ca63",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da9b358b_00a18494",
+        "filename": "src/application/Ships.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1007785
+      },
+      "writtenOn": "2016-03-30T19:25:33Z",
+      "side": 1,
+      "message": "bad variable name",
+      "revId": "fa2dde762bca0532915ea02915aaffa30d06ca63",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da9b358b_e0ad8089",
+        "filename": "src/application/Ships.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1007785
+      },
+      "writtenOn": "2016-03-30T19:25:33Z",
+      "side": 1,
+      "message": "bad variable name",
+      "revId": "fa2dde762bca0532915ea02915aaffa30d06ca63",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
