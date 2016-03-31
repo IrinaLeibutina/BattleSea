@@ -43,13 +43,13 @@ public class Battle extends Ships {
 
   public void CreateBattleField(Stage primaryStage) {
     Pane battle = new Pane();
-    Scene scene4 = new Scene(battle, WEIGHT, HEIGHT);
+    Scene scene4 = new Scene(battle, WIDTH, HEIGHT);
 
     // Create Image
     Image background = new Image(getClass().getResourceAsStream("Fon.jpg"));
     ImageView ground = new ImageView(background);
     ground.setFitHeight(HEIGHT);
-    ground.setFitWidth(WEIGHT);
+    ground.setFitWidth(WIDTH);
     battle.getChildren().add(ground);
 
     // Create button to return
@@ -65,7 +65,7 @@ public class Battle extends Ships {
       st.setAutoReverse(true);
       st.play();
     });
-    bg1.setOnMouseExited(event3 -> {
+    bg1.setOnMouseExited(event3 -> { 
       st.stop();
       bg1.setFill(Color.DARKSALMON);
     });
@@ -212,7 +212,7 @@ public class Battle extends Ships {
                   Image background = new Image(getClass().getResourceAsStream("Fon.jpg"));
                   ImageView ground = new ImageView(background);
                   ground.setFitHeight(HEIGHT);
-                  ground.setFitWidth(WEIGHT);
+                  ground.setFitWidth(WIDTH);
                   battle.getChildren().addAll(ground, win);
                   return;
                 }
@@ -242,7 +242,7 @@ public class Battle extends Ships {
               Image background = new Image(getClass().getResourceAsStream("Fon.jpg"));
               ImageView ground = new ImageView(background);
               ground.setFitHeight(HEIGHT);
-              ground.setFitWidth(WEIGHT);
+              ground.setFitWidth(WIDTH);
               battle.getChildren().addAll(ground, win);
               return;
             }

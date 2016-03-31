@@ -19,7 +19,7 @@ import javafx.util.Duration;
 
 public class Main extends Application {
 
-  public final static int WEIGHT = 900;
+  public final static int WIDTH = 900;
   public final static int HEIGHT = 600;
 
   public void start(Stage primaryStage) {
@@ -49,7 +49,7 @@ public class Main extends Application {
     back.setOnMouseClicked(event -> menuBox.setSubMenu(mainMenu));
     root.getChildren().addAll(menuBox);
 
-    Scene scene = new Scene(root, WEIGHT, HEIGHT);
+    Scene scene = new Scene(root, WIDTH, HEIGHT);
     FadeTransition ft = new FadeTransition(Duration.seconds(3), menuBox);
     ft.setFromValue(0);
     ft.setToValue(1);
@@ -88,7 +88,7 @@ public class Main extends Application {
     primaryStage.show();
   }
 
-  public void createRule(Stage primaryStage, Scene scene) {
+  public void createRule(Stage primaryStage, Scene scene) { 
     Pane root1 = new Pane();
 
     Scene scene1 = new Scene(root1, 794, 563);
@@ -97,7 +97,7 @@ public class Main extends Application {
     Image background = new Image(getClass().getResourceAsStream("img.png"));
     ImageView ground = new ImageView(background);
     ground.setFitHeight(HEIGHT);
-    ground.setFitWidth(WEIGHT);
+    ground.setFitWidth(WIDTH);
     root1.getChildren().add(ground);
 
     Rectangle comeBack = new Rectangle(130, 25, Color.DARKSALMON);
@@ -186,7 +186,7 @@ public class Main extends Application {
       MenuBox.subMenu = subMenu;
 
       setVisible(false);
-      Rectangle choice = new Rectangle(WEIGHT, HEIGHT);
+      Rectangle choice = new Rectangle(WIDTH, HEIGHT);
       choice.setOpacity(0.0);
       getChildren().addAll(choice, subMenu);
     }

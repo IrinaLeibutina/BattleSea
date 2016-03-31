@@ -46,13 +46,13 @@ public class BattleWithComp extends Ships {
 
   public void createBattle(Stage primaryStage) {
     Pane battle = new Pane();
-    Scene scene = new Scene(battle, WEIGHT, HEIGHT);
+    Scene scene = new Scene(battle, WIDTH, HEIGHT);
 
     // Create Image
     Image background = new Image(getClass().getResourceAsStream("Fon.jpg"));
     ImageView ground = new ImageView(background);
     ground.setFitHeight(HEIGHT);
-    ground.setFitWidth(WEIGHT);
+    ground.setFitWidth(WIDTH);
     battle.getChildren().add(ground);
 
     // Create button to return
@@ -147,7 +147,7 @@ public class BattleWithComp extends Ships {
                   Image background = new Image(getClass().getResourceAsStream("Fon.jpg"));
                   ImageView ground = new ImageView(background);
                   ground.setFitHeight(HEIGHT);
-                  ground.setFitWidth(WEIGHT);
+                  ground.setFitWidth(WIDTH); 
                   battle.getChildren().addAll(ground, win);
                   return;
                 }
@@ -176,7 +176,7 @@ public class BattleWithComp extends Ships {
               Image background = new Image(getClass().getResourceAsStream("Fon.jpg"));
               ImageView ground = new ImageView(background);
               ground.setFitHeight(HEIGHT);
-              ground.setFitWidth(WEIGHT);
+              ground.setFitWidth(WIDTH);
               battle.getChildren().addAll(ground, win);
               return;
             }
