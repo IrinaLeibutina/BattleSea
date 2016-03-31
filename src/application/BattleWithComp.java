@@ -99,7 +99,7 @@ public class BattleWithComp extends Ships {
     primaryStage.show();
   }
 
-  public void battle(Pane battle) {
+  public void battle(Pane battle) { 
     // Create field for 2 players
     Button[][] firstField = new Button[SIZE][SIZE];
     Button[][] secondField = new Button[SIZE][SIZE];
@@ -147,7 +147,7 @@ public class BattleWithComp extends Ships {
                   Image background = new Image(getClass().getResourceAsStream("Fon.jpg"));
                   ImageView ground = new ImageView(background);
                   ground.setFitHeight(HEIGHT);
-                  ground.setFitWidth(WIDTH); 
+                  ground.setFitWidth(WIDTH);
                   battle.getChildren().addAll(ground, win);
                   return;
                 }

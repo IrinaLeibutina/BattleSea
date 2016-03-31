@@ -17,7 +17,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
-public class Main extends Application {
+public class Main extends Application { 
 
   public final static int WIDTH = 900;
   public final static int HEIGHT = 600;
@@ -88,7 +88,7 @@ public class Main extends Application {
     primaryStage.show();
   }
 
-  public void createRule(Stage primaryStage, Scene scene) { 
+  public void createRule(Stage primaryStage, Scene scene) {
     Pane root1 = new Pane();
 
     Scene scene1 = new Scene(root1, 794, 563);

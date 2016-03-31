@@ -24,6 +24,10 @@ public class Ships {
   public final static int WIDTH = 900;
   public final static int HEIGHT = 600;
   public final static int SIZE = 10;
+  public final static int ONE = 1;
+  public final static int TWO = 2;
+  public final static int THREE = 3;
+  public final static int FOUR = 4;
   private static final int BATTLESHIP = 1;
   private static final int CRUISER = 2;
   private static final int DESTROYER = 3;
@@ -129,7 +133,7 @@ public class Ships {
           text.setLayoutY(210);
           shipsAndField.getChildren().addAll(text);
         }
-      } 
+      }
     });
 
     Text text = new Text("боепед");
@@ -351,8 +355,9 @@ public class Ships {
           for (int k = y - ONE; k < y + FOUR; k++) {
             int chONE = x + ONE;
 
-            if (checkForShip[x][k] == ONE || checkForShip[chONE][k] == ONE || checkForShip[x][k] == TWO
-                || checkForShip[x][k] == FOUR || checkForShip[chONE][k] == TWO || checkForShip[chONE][k] == FOUR
+            if (checkForShip[x][k] == ONE || checkForShip[chONE][k] == ONE
+                || checkForShip[x][k] == TWO || checkForShip[x][k] == FOUR
+                || checkForShip[chONE][k] == TWO || checkForShip[chONE][k] == FOUR
                 || checkForShip[chONE][k] == THREE || checkForShip[x][k] == THREE) {
               i = i - ONE;
               flag = ONE;
@@ -370,8 +375,9 @@ public class Ships {
             for (int k = y - ONE; k < y + FOUR; k++) {
               int chONE = x - ONE;
 
-              if (checkForShip[x][k] == ONE || checkForShip[chONE][k] == ONE || checkForShip[x][k] == TWO
-                  || checkForShip[x][k] == FOUR || checkForShip[chONE][k] == TWO || checkForShip[x][k] == FOUR
+              if (checkForShip[x][k] == ONE || checkForShip[chONE][k] == ONE
+                  || checkForShip[x][k] == TWO || checkForShip[x][k] == FOUR
+                  || checkForShip[chONE][k] == TWO || checkForShip[x][k] == FOUR
                   || checkForShip[chONE][k] == FOUR || checkForShip[chONE][k] == THREE) {
                 i = i - ONE;
                 flag = ONE;
@@ -390,12 +396,12 @@ public class Ships {
               int chONE = x + ONE;
               int chTWO = x - ONE;
 
-              if (checkForShip[x][k] == ONE || checkForShip[chONE][k] == ONE || checkForShip[chTWO][k] == ONE
-                  || checkForShip[x][k] == TWO || checkForShip[chONE][k] == TWO
-                  || checkForShip[chTWO][k] == TWO || checkForShip[x][k] == FOUR
-                  || checkForShip[chONE][k] == FOUR || checkForShip[chTWO][k] == FOUR
-                  || checkForShip[x][k] == THREE || checkForShip[chONE][k] == THREE
-                  || checkForShip[chTWO][k] == THREE) {
+              if (checkForShip[x][k] == ONE || checkForShip[chONE][k] == ONE
+                  || checkForShip[chTWO][k] == ONE || checkForShip[x][k] == TWO
+                  || checkForShip[chONE][k] == TWO || checkForShip[chTWO][k] == TWO
+                  || checkForShip[x][k] == FOUR || checkForShip[chONE][k] == FOUR
+                  || checkForShip[chTWO][k] == FOUR || checkForShip[x][k] == THREE
+                  || checkForShip[chONE][k] == THREE || checkForShip[chTWO][k] == THREE) {
                 i = i - ONE;
                 flag = ONE;
                 k = y + FOUR;
@@ -423,8 +429,9 @@ public class Ships {
           for (int k = x - ONE; k < x + FOUR; k++) {
             int chONE = y + ONE;
 
-            if (checkForShip[k][y] == ONE || checkForShip[k][chONE] == ONE || checkForShip[k][y] == TWO
-                || checkForShip[k][chONE] == TWO || checkForShip[k][y] == THREE || checkForShip[k][chONE] == THREE
+            if (checkForShip[k][y] == ONE || checkForShip[k][chONE] == ONE
+                || checkForShip[k][y] == TWO || checkForShip[k][chONE] == TWO
+                || checkForShip[k][y] == THREE || checkForShip[k][chONE] == THREE
                 || checkForShip[k][y] == FOUR || checkForShip[k][chONE] == FOUR) {
               i = i - ONE;
               flag = ONE;
@@ -442,10 +449,10 @@ public class Ships {
             for (int k = x - ONE; k < x + FOUR; k++) {
               int chONE = y - ONE;
 
-              if (checkForShip[k][y] == ONE || checkForShip[k][chONE] == ONE || checkForShip[k][y] == TWO
-                  || checkForShip[k][chONE] == TWO || checkForShip[k][y] == THREE
-                  || checkForShip[k][y] == FOUR || checkForShip[k][chONE] == THREE
-                  || checkForShip[k][chONE] == FOUR) {
+              if (checkForShip[k][y] == ONE || checkForShip[k][chONE] == ONE
+                  || checkForShip[k][y] == TWO || checkForShip[k][chONE] == TWO
+                  || checkForShip[k][y] == THREE || checkForShip[k][y] == FOUR
+                  || checkForShip[k][chONE] == THREE || checkForShip[k][chONE] == FOUR) {
                 i = i - ONE;
                 flag = ONE;
                 k = x + FOUR;
@@ -462,12 +469,12 @@ public class Ships {
               int chONE = y + ONE;
               int chTWO = y - ONE;
 
-              if (checkForShip[k][y] == ONE || checkForShip[k][chONE] == ONE || checkForShip[k][chTWO] == ONE
-                  || checkForShip[k][y] == TWO || checkForShip[k][chONE] == TWO
-                  || checkForShip[k][chTWO] == TWO || checkForShip[k][y] == THREE
-                  || checkForShip[k][chONE] == THREE || checkForShip[k][chTWO] == THREE
-                  || checkForShip[k][y] == FOUR || checkForShip[k][chONE] == FOUR
-                  || checkForShip[k][chTWO] == FOUR) {
+              if (checkForShip[k][y] == ONE || checkForShip[k][chONE] == ONE
+                  || checkForShip[k][chTWO] == ONE || checkForShip[k][y] == TWO
+                  || checkForShip[k][chONE] == TWO || checkForShip[k][chTWO] == TWO
+                  || checkForShip[k][y] == THREE || checkForShip[k][chONE] == THREE
+                  || checkForShip[k][chTWO] == THREE || checkForShip[k][y] == FOUR
+                  || checkForShip[k][chONE] == FOUR || checkForShip[k][chTWO] == FOUR) {
                 i = i - ONE;
                 flag = ONE;
                 k = x + FOUR;
@@ -486,7 +493,8 @@ public class Ships {
     }
     return i;
   }
-///
+
+  ///
   public int setDestroyer(Button[][] ship, int i, int buttle) {
     SecureRandom rand = new SecureRandom();
     int number = TWO;
@@ -648,12 +656,14 @@ public class Ships {
     if (x == 0 && y == 0) {
       int chONE = x + ONE;
       int chTHREE = y + ONE;
-      if (checkForShip[x][y] == ONE || checkForShip[chONE][y] == ONE || checkForShip[x][chTHREE] == ONE
-          || checkForShip[chONE][chTHREE] == ONE || checkForShip[x][y] == TWO || checkForShip[chONE][y] == TWO
-          || checkForShip[x][chTHREE] == TWO || checkForShip[chONE][chTHREE] == TWO || checkForShip[x][y] == THREE
-          || checkForShip[chONE][y] == THREE || checkForShip[x][chTHREE] == THREE || checkForShip[chONE][chTHREE] == THREE
-          || checkForShip[x][y] == FOUR || checkForShip[chONE][y] == FOUR || checkForShip[x][chTHREE] == FOUR
-          || checkForShip[chONE][chTHREE] == FOUR) {
+      if (checkForShip[x][y] == ONE || checkForShip[chONE][y] == ONE
+          || checkForShip[x][chTHREE] == ONE || checkForShip[chONE][chTHREE] == ONE
+          || checkForShip[x][y] == TWO || checkForShip[chONE][y] == TWO
+          || checkForShip[x][chTHREE] == TWO || checkForShip[chONE][chTHREE] == TWO
+          || checkForShip[x][y] == THREE || checkForShip[chONE][y] == THREE
+          || checkForShip[x][chTHREE] == THREE || checkForShip[chONE][chTHREE] == THREE
+          || checkForShip[x][y] == FOUR || checkForShip[chONE][y] == FOUR
+          || checkForShip[x][chTHREE] == FOUR || checkForShip[chONE][chTHREE] == FOUR) {
         i = i - ONE;
       } else {
         setShipColor(ship, x, y, buttle);
@@ -664,15 +674,18 @@ public class Ships {
         int chONE = x + ONE;
         int chTHREE = y + ONE;
         int chFOUR = y - ONE;
-        if (checkForShip[x][y] == ONE || checkForShip[chONE][y] == ONE || checkForShip[x][chTHREE] == ONE
-            || checkForShip[x][chFOUR] == ONE || checkForShip[chONE][chTHREE] == ONE
-            || checkForShip[chONE][chFOUR] == ONE || checkForShip[x][y] == TWO || checkForShip[chONE][y] == TWO
-            || checkForShip[x][chTHREE] == TWO || checkForShip[x][chFOUR] == TWO || checkForShip[chONE][chTHREE] == TWO
-            || checkForShip[chONE][chFOUR] == TWO || checkForShip[x][y] == THREE || checkForShip[chONE][y] == THREE
-            || checkForShip[x][chTHREE] == THREE || checkForShip[x][chFOUR] == THREE || checkForShip[chONE][chTHREE] == THREE
-            || checkForShip[chONE][chFOUR] == FOUR || checkForShip[chONE][chFOUR] == THREE || checkForShip[x][y] == FOUR
-            || checkForShip[chONE][y] == FOUR || checkForShip[x][chTHREE] == FOUR || checkForShip[x][chFOUR] == FOUR
-            || checkForShip[chONE][chTHREE] == FOUR) {
+        if (checkForShip[x][y] == ONE || checkForShip[chONE][y] == ONE
+            || checkForShip[x][chTHREE] == ONE || checkForShip[x][chFOUR] == ONE
+            || checkForShip[chONE][chTHREE] == ONE || checkForShip[chONE][chFOUR] == ONE
+            || checkForShip[x][y] == TWO || checkForShip[chONE][y] == TWO
+            || checkForShip[x][chTHREE] == TWO || checkForShip[x][chFOUR] == TWO
+            || checkForShip[chONE][chTHREE] == TWO || checkForShip[chONE][chFOUR] == TWO
+            || checkForShip[x][y] == THREE || checkForShip[chONE][y] == THREE
+            || checkForShip[x][chTHREE] == THREE || checkForShip[x][chFOUR] == THREE
+            || checkForShip[chONE][chTHREE] == THREE || checkForShip[chONE][chFOUR] == FOUR
+            || checkForShip[chONE][chFOUR] == THREE || checkForShip[x][y] == FOUR
+            || checkForShip[chONE][y] == FOUR || checkForShip[x][chTHREE] == FOUR
+            || checkForShip[x][chFOUR] == FOUR || checkForShip[chONE][chTHREE] == FOUR) {
           i = i - ONE;
         } else {
           setShipColor(ship, x, y, buttle);
@@ -683,14 +696,16 @@ public class Ships {
           int chTWO = x - ONE;
           int chTHREE = y + ONE;
           int chFOUR = y - ONE;
-          if (checkForShip[x][y] == ONE || checkForShip[chTWO][y] == ONE || checkForShip[x][chTHREE] == ONE
-              || checkForShip[x][chFOUR] == ONE || checkForShip[chTWO][chFOUR] == ONE
-              || checkForShip[chTWO][chTHREE] == ONE || checkForShip[x][y] == TWO || checkForShip[chTWO][y] == TWO
+          if (checkForShip[x][y] == ONE || checkForShip[chTWO][y] == ONE
+              || checkForShip[x][chTHREE] == ONE || checkForShip[x][chFOUR] == ONE
+              || checkForShip[chTWO][chFOUR] == ONE || checkForShip[chTWO][chTHREE] == ONE
+              || checkForShip[x][y] == TWO || checkForShip[chTWO][y] == TWO
               || checkForShip[x][chTHREE] == TWO || checkForShip[x][chFOUR] == TWO
               || checkForShip[chTWO][chFOUR] == TWO || checkForShip[chTWO][chTHREE] == TWO
-              || checkForShip[x][y] == THREE || checkForShip[chTWO][y] == THREE || checkForShip[x][chTHREE] == THREE
-              || checkForShip[x][chFOUR] == THREE || checkForShip[chTWO][chFOUR] == THREE
-              || checkForShip[chTWO][chTHREE] == THREE || checkForShip[x][y] == FOUR || checkForShip[chTWO][y] == FOUR
+              || checkForShip[x][y] == THREE || checkForShip[chTWO][y] == THREE
+              || checkForShip[x][chTHREE] == THREE || checkForShip[x][chFOUR] == THREE
+              || checkForShip[chTWO][chFOUR] == THREE || checkForShip[chTWO][chTHREE] == THREE
+              || checkForShip[x][y] == FOUR || checkForShip[chTWO][y] == FOUR
               || checkForShip[x][chTHREE] == FOUR || checkForShip[x][chFOUR] == FOUR
               || checkForShip[chTWO][chFOUR] == FOUR || checkForShip[chTWO][chTHREE] == FOUR) {
             i = i - ONE;
@@ -704,18 +719,18 @@ public class Ships {
             int chTWO = x - ONE;
             int chTHREE = y + ONE;
 
-            if (checkForShip[x][y] == ONE || checkForShip[chONE][y] == ONE || checkForShip[chTWO][y] == ONE
-                || checkForShip[x][chTHREE] == ONE || checkForShip[chONE][chTHREE] == ONE
-                || checkForShip[chTWO][chTHREE] == ONE || checkForShip[x][y] == TWO
-                || checkForShip[chONE][y] == TWO || checkForShip[chTWO][y] == TWO
-                || checkForShip[x][chTHREE] == TWO || checkForShip[chONE][chTHREE] == TWO
-                || checkForShip[chTWO][chTHREE] == TWO || checkForShip[x][y] == THREE
-                || checkForShip[chONE][y] == THREE || checkForShip[chTWO][y] == THREE
-                || checkForShip[x][chTHREE] == THREE || checkForShip[chONE][chTHREE] == THREE
-                || checkForShip[chTWO][chTHREE] == THREE || checkForShip[x][y] == FOUR
-                || checkForShip[chONE][y] == FOUR || checkForShip[chTWO][y] == FOUR
-                || checkForShip[x][chTHREE] == FOUR || checkForShip[chONE][chTHREE] == FOUR
-                || checkForShip[chTWO][chTHREE] == FOUR) {
+            if (checkForShip[x][y] == ONE || checkForShip[chONE][y] == ONE
+                || checkForShip[chTWO][y] == ONE || checkForShip[x][chTHREE] == ONE
+                || checkForShip[chONE][chTHREE] == ONE || checkForShip[chTWO][chTHREE] == ONE
+                || checkForShip[x][y] == TWO || checkForShip[chONE][y] == TWO
+                || checkForShip[chTWO][y] == TWO || checkForShip[x][chTHREE] == TWO
+                || checkForShip[chONE][chTHREE] == TWO || checkForShip[chTWO][chTHREE] == TWO
+                || checkForShip[x][y] == THREE || checkForShip[chONE][y] == THREE
+                || checkForShip[chTWO][y] == THREE || checkForShip[x][chTHREE] == THREE
+                || checkForShip[chONE][chTHREE] == THREE || checkForShip[chTWO][chTHREE] == THREE
+                || checkForShip[x][y] == FOUR || checkForShip[chONE][y] == FOUR
+                || checkForShip[chTWO][y] == FOUR || checkForShip[x][chTHREE] == FOUR
+                || checkForShip[chONE][chTHREE] == FOUR || checkForShip[chTWO][chTHREE] == FOUR) {
               i = i - ONE;
             } else {
               setShipColor(ship, x, y, buttle);
@@ -727,18 +742,18 @@ public class Ships {
               int chONE = x + ONE;
               int chTWO = x - ONE;
               int chFOUR = y - ONE;
-              if (checkForShip[x][y] == ONE || checkForShip[chONE][y] == ONE || checkForShip[chTWO][y] == ONE
-                  || checkForShip[x][chFOUR] == ONE || checkForShip[chTWO][chFOUR] == ONE
-                  || checkForShip[chONE][chFOUR] == ONE || checkForShip[x][y] == TWO
-                  || checkForShip[chONE][y] == TWO || checkForShip[chTWO][y] == TWO
-                  || checkForShip[x][chFOUR] == TWO || checkForShip[chTWO][chFOUR] == TWO
-                  || checkForShip[chONE][chFOUR] == TWO || checkForShip[x][y] == THREE
-                  || checkForShip[chONE][y] == THREE || checkForShip[chTWO][y] == THREE
-                  || checkForShip[x][chFOUR] == THREE || checkForShip[chTWO][chFOUR] == THREE
-                  || checkForShip[chONE][chFOUR] == THREE || checkForShip[x][y] == FOUR
-                  || checkForShip[chONE][y] == FOUR || checkForShip[chTWO][y] == FOUR
-                  || checkForShip[x][chFOUR] == FOUR || checkForShip[chTWO][chFOUR] == FOUR
-                  || checkForShip[chONE][chFOUR] == FOUR) {
+              if (checkForShip[x][y] == ONE || checkForShip[chONE][y] == ONE
+                  || checkForShip[chTWO][y] == ONE || checkForShip[x][chFOUR] == ONE
+                  || checkForShip[chTWO][chFOUR] == ONE || checkForShip[chONE][chFOUR] == ONE
+                  || checkForShip[x][y] == TWO || checkForShip[chONE][y] == TWO
+                  || checkForShip[chTWO][y] == TWO || checkForShip[x][chFOUR] == TWO
+                  || checkForShip[chTWO][chFOUR] == TWO || checkForShip[chONE][chFOUR] == TWO
+                  || checkForShip[x][y] == THREE || checkForShip[chONE][y] == THREE
+                  || checkForShip[chTWO][y] == THREE || checkForShip[x][chFOUR] == THREE
+                  || checkForShip[chTWO][chFOUR] == THREE || checkForShip[chONE][chFOUR] == THREE
+                  || checkForShip[x][y] == FOUR || checkForShip[chONE][y] == FOUR
+                  || checkForShip[chTWO][y] == FOUR || checkForShip[x][chFOUR] == FOUR
+                  || checkForShip[chTWO][chFOUR] == FOUR || checkForShip[chONE][chFOUR] == FOUR) {
                 i = i - ONE;
               } else {
                 setShipColor(ship, x, y, buttle);
@@ -760,7 +775,8 @@ public class Ships {
                     || checkForShip[chONE][chTHREE] == THREE || checkForShip[chONE][chFOUR] == THREE
                     || checkForShip[x][y] == FOUR || checkForShip[chONE][y] == FOUR
                     || checkForShip[x][chTHREE] == FOUR || checkForShip[x][chFOUR] == FOUR
-                    || checkForShip[chONE][chTHREE] == FOUR || checkForShip[chONE][chFOUR] == FOUR) {
+                    || checkForShip[chONE][chTHREE] == FOUR
+                    || checkForShip[chONE][chFOUR] == FOUR) {
                   i = i - ONE;
                 } else {
                   setShipColor(ship, x, y, buttle);
@@ -771,24 +787,24 @@ public class Ships {
               int chTWO = x - ONE;
               int chTHREE = y + ONE;
               int chFOUR = y - ONE;
-              if (checkForShip[x][y] == ONE || checkForShip[chONE][y] == ONE || checkForShip[chTWO][y] == ONE
-                  || checkForShip[x][chTHREE] == ONE || checkForShip[x][chFOUR] == ONE
-                  || checkForShip[chTWO][chFOUR] == ONE || checkForShip[chONE][chTHREE] == ONE
-                  || checkForShip[chONE][chFOUR] == ONE || checkForShip[chTWO][chTHREE] == ONE
-                  || checkForShip[x][y] == TWO || checkForShip[chONE][y] == TWO
-                  || checkForShip[chTWO][y] == TWO || checkForShip[x][chTHREE] == TWO
-                  || checkForShip[x][chFOUR] == TWO || checkForShip[chTWO][chFOUR] == TWO
-                  || checkForShip[chONE][chTHREE] == TWO || checkForShip[chONE][chFOUR] == TWO
-                  || checkForShip[chTWO][chTHREE] == TWO || checkForShip[x][y] == THREE
-                  || checkForShip[chONE][y] == THREE || checkForShip[chTWO][y] == THREE
-                  || checkForShip[x][chTHREE] == THREE || checkForShip[x][chFOUR] == THREE
-                  || checkForShip[chTWO][chFOUR] == THREE || checkForShip[chONE][chTHREE] == THREE
-                  || checkForShip[chONE][chFOUR] == THREE || checkForShip[chTWO][chTHREE] == THREE
-                  || checkForShip[x][y] == FOUR || checkForShip[chONE][y] == FOUR
-                  || checkForShip[chTWO][y] == FOUR || checkForShip[x][chTHREE] == FOUR
-                  || checkForShip[x][chFOUR] == FOUR || checkForShip[chTWO][chFOUR] == FOUR
-                  || checkForShip[chONE][chTHREE] == FOUR || checkForShip[chONE][chFOUR] == FOUR
-                  || checkForShip[chTWO][chTHREE] == FOUR) {
+              if (checkForShip[x][y] == ONE || checkForShip[chONE][y] == ONE
+                  || checkForShip[chTWO][y] == ONE || checkForShip[x][chTHREE] == ONE
+                  || checkForShip[x][chFOUR] == ONE || checkForShip[chTWO][chFOUR] == ONE
+                  || checkForShip[chONE][chTHREE] == ONE || checkForShip[chONE][chFOUR] == ONE
+                  || checkForShip[chTWO][chTHREE] == ONE || checkForShip[x][y] == TWO
+                  || checkForShip[chONE][y] == TWO || checkForShip[chTWO][y] == TWO
+                  || checkForShip[x][chTHREE] == TWO || checkForShip[x][chFOUR] == TWO
+                  || checkForShip[chTWO][chFOUR] == TWO || checkForShip[chONE][chTHREE] == TWO
+                  || checkForShip[chONE][chFOUR] == TWO || checkForShip[chTWO][chTHREE] == TWO
+                  || checkForShip[x][y] == THREE || checkForShip[chONE][y] == THREE
+                  || checkForShip[chTWO][y] == THREE || checkForShip[x][chTHREE] == THREE
+                  || checkForShip[x][chFOUR] == THREE || checkForShip[chTWO][chFOUR] == THREE
+                  || checkForShip[chONE][chTHREE] == THREE || checkForShip[chONE][chFOUR] == THREE
+                  || checkForShip[chTWO][chTHREE] == THREE || checkForShip[x][y] == FOUR
+                  || checkForShip[chONE][y] == FOUR || checkForShip[chTWO][y] == FOUR
+                  || checkForShip[x][chTHREE] == FOUR || checkForShip[x][chFOUR] == FOUR
+                  || checkForShip[chTWO][chFOUR] == FOUR || checkForShip[chONE][chTHREE] == FOUR
+                  || checkForShip[chONE][chFOUR] == FOUR || checkForShip[chTWO][chTHREE] == FOUR) {
                 i = i - ONE;
               } else {
                 setShipColor(ship, x, y, buttle);

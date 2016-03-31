@@ -36,7 +36,7 @@ public class Battle extends Ships {
   public Battle() {
     for (int i = 0; i < SIZE; i++) {
       for (int j = 0; j < SIZE; j++) {
-        field[i][j] = new Button();
+        field[i][j] = new Button(); 
       }
     }
   }
@@ -65,7 +65,7 @@ public class Battle extends Ships {
       st.setAutoReverse(true);
       st.play();
     });
-    bg1.setOnMouseExited(event3 -> { 
+    bg1.setOnMouseExited(event3 -> {
       st.stop();
       bg1.setFill(Color.DARKSALMON);
     });
