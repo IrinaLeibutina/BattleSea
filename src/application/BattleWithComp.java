@@ -5,8 +5,6 @@ import javafx.animation.Animation;
 import javafx.animation.FillTransition;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -15,111 +13,219 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
+import static application.Constants.*;
 import java.security.SecureRandom;
-
-import application.Main;
 
 public class BattleWithComp extends Ships {
 
   public boolean first = false;
   public boolean second = true;
-
-  public int battleship1 = 1;
-  public int cruiser1 = 2;
-  public int destroyer1 = 3;
-  public int boat1 = 4;
-  public int battleship2 = 1;
-  public int cruiser2 = 2;
-  public int destroyer2 = 3;
-  public int boat2 = 4;
-  public static int[][] newCheck = new int[SIZE][SIZE];
   Button[][] field = new Button[SIZE][SIZE];
+  Interface inter;
+  Field fieldForBattle;
 
   BattleWithComp() {
     for (int i = 0; i < SIZE; i++) {
       for (int j = 0; j < SIZE; j++) {
         field[i][j] = new Button();
+        saveFirstField[i][j] = checkForShipFirst[i][j];
+        saveSecondField[i][j] = checkForShipSecond[i][j];
+        saveFirstBattle[i][j] = 0;
+        saveSecondBattle[i][j] = 0;
+        positionFirst = 0;
+        positionSecond = 1;
+        inter = new Interface();
+        fieldForBattle = new Field();
       }
     }
   }
 
-  public void createBattle(Stage primaryStage) {
+  public void createBattle(Stage primaryStage, int level) {
     Pane battle = new Pane();
-    Scene scene = new Scene(battle, WIDTH, HEIGHT);
+    Scene scene = new Scene(battle, WEIGHT, HEIGHT);
+    Battle battleWithComp = new Battle();
+    battleWithComp.getInterface(battle, primaryStage);
+    fieldForBattle.fieldNameForBattle(battle);
+    battle(battle, level, primaryStage);
+    primaryStage.setScene(scene);
+    primaryStage.show();
+  }
 
-    // Create Image
-    Image background = new Image(getClass().getResourceAsStream("Fon.jpg"));
-    ImageView ground = new ImageView(background);
-    ground.setFitHeight(HEIGHT);
-    ground.setFitWidth(WIDTH);
-    battle.getChildren().add(ground);
+  public void playGame(Stage primaryStage, Text win) {
+    Pane battle = new Pane();
+    Scene scene = new Scene(battle, WEIGHT, HEIGHT);
+    // Get interface for field
+    Battle battleWithComp = new Battle();
+    battleWithComp.getInterface(battle, primaryStage);
+    battle.getChildren().addAll(win);
 
-    // Create button to return
-    Rectangle back = new Rectangle(130, 25, Color.DARKSALMON);
-    back.setOpacity(0.5);
-    back.setLayoutX(750);
-    back.setLayoutY(550);
-    FillTransition transition = new FillTransition(Duration.seconds(0.5), back);
-    back.setOnMouseEntered(event2 -> {
-      transition.setFromValue(Color.YELLOW);
-      transition.setToValue(Color.CORNSILK);
-      transition.setCycleCount(Animation.INDEFINITE);
-      transition.setAutoReverse(true);
-      transition.play();
+    Rectangle repeat = new Rectangle(150, 25, Color.DARKSALMON);
+    repeat.setOpacity(0.5);
+
+    repeat.setLayoutX(450);
+    repeat.setLayoutY(550);
+    FillTransition fillTrasition = new FillTransition(Duration.seconds(0.5), repeat);
+    repeat.setOnMouseEntered(event -> {
+      fillTrasition.setFromValue(Color.YELLOW);
+      fillTrasition.setToValue(Color.CORNSILK);
+      fillTrasition.setCycleCount(Animation.INDEFINITE);
+      fillTrasition.setAutoReverse(true);
+      fillTrasition.play();
     });
-    back.setOnMouseExited(event3 -> {
-      st.stop();
-      back.setFill(Color.DARKSALMON);
-    });
-    back.setOnMouseClicked(event1 -> {
-      Main back = new Main();
-      back.start(primaryStage);
+    repeat.setOnMouseExited(event -> {
+      fillTrasition.stop();
+      repeat.setFill(Color.DARKSALMON);
     });
 
-    Text text = new Text("НАЗАД");
+    Text text = new Text("ПОВТОР ИГРЫ");
     text.setFill(Color.FIREBRICK);
+
     text.setFont(Font.font("Arial", FontPosture.ITALIC, 16));
-    text.setLayoutX(785);
+    text.setLayoutX(470);
     text.setLayoutY(568);
-    battle.getChildren().addAll(text, back);
 
-    // Create field for text
-    Rectangle textFiel1 = new Rectangle(330, 150, Color.DARKSALMON);
+    battle.getChildren().addAll(text, repeat);
 
-    textFiel1.setOpacity(0.5);
-    textFiel1.setLayoutX(45);
-    textFiel1.setLayoutY(390);
+    repeat.setOnMouseClicked(event -> {
+      battleWithComp.getInterface(battle, primaryStage);
 
-    Battle b = new Battle();
-    b.fieldName(battle);
-    battle(battle);
+      fieldForBattle.fieldNameForBattle(battle);
+      repeat(battle, primaryStage);
+    });
 
     primaryStage.setScene(scene);
     primaryStage.show();
   }
 
-  public void battle(Pane battle) { 
-    // Create field for 2 players
-    Button[][] firstField = new Button[SIZE][SIZE];
-    Button[][] secondField = new Button[SIZE][SIZE];
+  public void repeat(Pane battle, Stage primaryStage) {
+    // Create field for battle
+    Button[][] firstField = fieldForBattle.createFieldForBattle(ONE);
+    Button[][] secondField = fieldForBattle.createFieldForBattle(TWO);
 
     for (int i = 0; i < SIZE; i++) {
       for (int j = 0; j < SIZE; j++) {
-        double k = i + 1.5;
-        double l = j + 1.5;
+        battle.getChildren().addAll(firstField[i][j], secondField[i][j]);
+      }
+    }
 
-        firstField[i][j] = new Button();
-        secondField[i][j] = new Button();
+    Rectangle repeat = new Rectangle(150, 25, Color.DARKSALMON);
+    repeat.setOpacity(0.5);
 
-        firstField[i][j].setStyle("-fx-base: lightgreen");
-        secondField[i][j].setStyle("-fx-base: lightgreen");
-        firstField[i][j].setMinSize(30, 30);
-        secondField[i][j].setMinSize(30, 30);
-        firstField[i][j].setLayoutX(30 * k);
-        firstField[i][j].setLayoutY(30 * l);
-        secondField[i][j].setLayoutX(30 * k + 500);
-        secondField[i][j].setLayoutY(30 * l);
+    repeat.setLayoutX(450);
+    repeat.setLayoutY(550);
+
+    FillTransition fillTrasition = new FillTransition(Duration.seconds(0.5), repeat);
+    repeat.setOnMouseEntered(event -> {
+      fillTrasition.setFromValue(Color.YELLOW);
+      fillTrasition.setToValue(Color.CORNSILK);
+      fillTrasition.setCycleCount(Animation.INDEFINITE);
+      fillTrasition.setAutoReverse(true);
+      fillTrasition.play();
+    });
+    repeat.setOnMouseExited(event -> {
+      fillTrasition.stop();
+      repeat.setFill(Color.DARKSALMON);
+    });
+    Text text = new Text("ПОВТОР ИГРЫ");
+    text.setFill(Color.FIREBRICK);
+
+    text.setFont(Font.font("Arial", FontPosture.ITALIC, 16));
+    text.setLayoutX(455);
+    text.setLayoutX(550);
+    battle.getChildren().addAll(repeat);
+
+    Text win = new Text();
+    win.setLayoutX(330);
+    win.setLayoutY(250);
+    win.setFont(Font.font("Arial", FontPosture.ITALIC, 32));
+    win.setFill(Color.DARKSALMON);
+
+    boat1 = FOUR;
+    destroyer1 = THREE;
+    cruiser1 = TWO;
+    battleship1 = ONE;
+    boat2 = FOUR;
+    destroyer2 = THREE;
+    cruiser2 = TWO;
+    battleship2 = ONE;
+
+    repeat.setOnMouseClicked(event -> {
+      for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+
+          if (boat1 == NULL && battleship1 == NULL && cruiser1 == NULL && destroyer1 == NULL
+              && key == NULL) {
+            win.setText("Комрьютер победил!!!");
+            battle.getChildren().add(win);
+            System.out.println("Второй ");
+            key++;
+            return;
+          }
+          if (boat2 == NULL && battleship2 == NULL && cruiser2 == NULL && destroyer2 == NULL
+              && key == NULL) {
+            win.setText("Игрок Победил!!!");
+            battle.getChildren().addAll(win);
+            key++;
+            System.out.println("Первый");
+            return;
+          }
+
+          if (saveSecondBattle[i][j] == positionSecond) {
+            int x = i;
+            int y = j;
+            System.out.println("\nFindFirst" + positionSecond);
+            positionSecond++;
+            newCheck = saveFirstField;
+
+            if (newCheck[x][y] != NULL) {
+              field = firstField;
+              boat1 = boatCheck(field, x, y, boat1); // Boat
+              destroyer1 = destroyerCheck(field, x, y, destroyer1); // Destroyer
+              cruiser1 = cruiserCheck(field, x, y, cruiser1); // Cruiser
+              battleship1 = battleshipCheck(field, x, y, battleship1, ONE); // Battleship
+
+            } else {
+              firstField[x][y].setStyle("-fx-base: lightgrey");
+              firstField[x][y].setOpacity(NULL);
+              newCheck[x][y] = -1;
+            }
+            i = NULL;
+            j = NULL;
+          }
+          if (saveFirstBattle[i][j] == positionSecond) {
+            int x = i;
+            int y = j;
+
+            newCheck = saveSecondField;
+
+            if (newCheck[x][y] != NULL) {
+              field = secondField;
+              boat2 = boatCheck(field, x, y, boat2); // Boat
+              battleship2 = battleshipCheck(field, x, y, battleship2, TWO); // Destroyer
+              cruiser2 = cruiserCheck(field, x, y, cruiser2); // Cruiser
+              destroyer2 = destroyerCheck(field, x, y, destroyer2); // Battleship
+            } else {
+              secondField[x][y].setStyle("-fx-base: lightgrey");
+              secondField[x][y].setOpacity(NULL);
+              newCheck[x][y] = -1;
+            }
+            System.out.println("\nFindSecond" + positionSecond);
+            positionSecond++;
+            i = NULL;
+            j = NULL;
+          }
+        }
+      }
+    });
+  }
+
+  public void battle(Pane battle, int level, Stage primaryStage) {
+    // Create field for battle
+    Button[][] firstField = fieldForBattle.createFieldForBattle(1);
+    Button[][] secondField = fieldForBattle.createFieldForBattle(2);
+
+    for (int i = 0; i < SIZE; i++) {
+      for (int j = 0; j < SIZE; j++) {
         battle.getChildren().addAll(firstField[i][j], secondField[i][j]);
       }
     }
@@ -133,78 +239,86 @@ public class BattleWithComp extends Ships {
       for (int j = 0; j < SIZE; j++) {
         int x = i;
         int y = j;
-        secondField[i][j].setOnMouseClicked(eventSIZE -> {
+        Save save = new Save();
+        // Battle
+        secondField[i][j].setOnMouseClicked(event -> {
           if (first == false) {
+            if (boat1 == NULL && battleship1 == NULL && cruiser1 == NULL && destroyer1 == NULL) {
+              win.setText("Игрок победил!!!");
+              playGame(primaryStage, win);
+              return;
+            }
             newCheck = checkForShipSecond;
-            if (newCheck[x][y] == -1) {
+            if (newCheck[x][y] == -1 || newCheck[x][y] == 8 || newCheck[x][y] == SIX
+                || newCheck[x][y] == FIFE || newCheck[x][y] == 9) {
               second = false;
               first = false;
             } else {
-              if (newCheck[x][y] != 0) {
-                if (boat1 == 0 && battleship1 == 0 && cruiser1 == 0 && destroyer1 == 0) {
-                  System.out.println("First");
-                  win.setText("Компьютер победил!!!");
-                  Image background = new Image(getClass().getResourceAsStream("Fon.jpg"));
-                  ImageView ground = new ImageView(background);
-                  ground.setFitHeight(HEIGHT);
-                  ground.setFitWidth(WIDTH);
-                  battle.getChildren().addAll(ground, win);
-                  return;
-                }
+              if (newCheck[x][y] != NULL) {
                 second = false;
                 first = false;
                 field = secondField;
                 boat1 = boatCheck(field, x, y, boat1); // Boat
-                battleship1 = destroyerCheck(field, x, y, destroyer1); // Destroyer
+                destroyer1 = destroyerCheck(field, x, y, destroyer1); // Destroyer
                 cruiser1 = cruiserCheck(field, x, y, cruiser1); // Cruiser
-                destroyer1 = battleshipCheck(field, x, y, battleship1, 1); // Battleship
+                battleship1 = battleshipCheck(field, x, y, battleship1, 1); // Battleship
+                positionFirst++;
+                saveFirstBattle[x][y] = positionFirst;
               }
-              if (newCheck[x][y] == 0) {
+              if (newCheck[x][y] == NULL) {
                 secondField[x][y].setStyle("-fx-base: lightgrey");
                 secondField[x][y].setOpacity(0);
                 newCheck[x][y] = -1;
                 second = true;
                 first = true;
+                positionFirst++;
+                saveFirstBattle[x][y] = positionFirst;
               }
             }
+            save.saveArrayToFile(saveFirstField, saveSecondField, saveFirstBattle, saveSecondBattle,
+                "d:\\filename.txt");
           }
 
           if (second) {
-            if (boat2 == 0 && battleship2 == 0 && cruiser2 == 0 && destroyer2 == 0) {
+            if (boat2 == NULL && battleship2 == NULL && cruiser2 == NULL && destroyer2 == NULL) {
               System.out.println("Second");
-              win.setText("Игрок Победил!!!");
-              Image background = new Image(getClass().getResourceAsStream("Fon.jpg"));
-              ImageView ground = new ImageView(background);
-              ground.setFitHeight(HEIGHT);
-              ground.setFitWidth(WIDTH);
-              battle.getChildren().addAll(ground, win);
+              win.setText("Компьютер победил!!!");
+              playGame(primaryStage, win);
               return;
             }
             SecureRandom rand = new SecureRandom();
-            int X = (rand.nextInt(9));
-            int Y = (rand.nextInt(9));
+            int positionX = (rand.nextInt(SIZE));
+            int positionY = (rand.nextInt(SIZE));
             newCheck = checkForShipFirst;
-            if (newCheck[X][Y] == -1) {
+            if (newCheck[positionX][positionY] == -1 || newCheck[positionX][positionY] == 8
+                || newCheck[positionX][positionY] == SIX || newCheck[positionX][positionY] == FIFE
+                || newCheck[positionX][positionY] == 9) {
               second = true;
               first = true;
             } else {
-              if (newCheck[X][Y] != 0) {
+              if (newCheck[positionX][positionY] != NULL) {
                 second = true;
                 first = true;
                 field = firstField;
-                boat2 = boatCheck(field, X, Y, boat1);
-                battleship2 = destroyerCheck(field, X, Y, destroyer1);
-                cruiser2 = cruiserCheck(field, X, Y, cruiser2);
-                destroyer2 = battleshipCheck(field, X, Y, battleship2, 2);
+                boat2 = boatCheck(field, positionX, positionY, boat2);
+                destroyer2 = destroyerCheck(field, positionX, positionY, destroyer2);
+                cruiser2 = cruiserCheck(field, positionX, positionY, cruiser2);
+                battleship2 = battleshipCheck(field, positionX, positionY, battleship2, TWO);
+                positionFirst++;
+                saveSecondBattle[positionX][positionY] = positionFirst;
               }
-              if (newCheck[X][Y] == 0) {
-                firstField[X][Y].setStyle("-fx-base: lightgrey");
-                firstField[X][Y].setOpacity(0);
-                newCheck[X][Y] = -1;
+              if (newCheck[positionX][positionY] == NULL) {
+                firstField[positionX][positionY].setStyle("-fpositionX-base: lightgrepositionY");
+                firstField[positionX][positionY].setOpacity(0);
+                newCheck[positionX][positionY] = -1;
                 second = false;
                 first = false;
+                positionFirst++;
+                saveSecondBattle[positionX][positionY] = positionFirst;
               }
             }
+            save.saveArrayToFile(saveFirstField, saveSecondField, saveFirstBattle, saveSecondBattle,
+                "d:\\filename.txt");
           }
         });
       }
@@ -213,186 +327,185 @@ public class BattleWithComp extends Ships {
 
   // System.out.println(...) use for check in console
   public int battleshipCheck(Button[][] field, int x, int y, int Battleship, int stroke) {
-    int count = 0;
-    if (Battleship == 0) {
-      return 0;
+    int count = NULL;
+    if (Battleship == NULL) {
+      return NULL;
     }
-    if (newCheck[x][y] == 4 && stroke == 1) {
+    if (newCheck[x][y] == FOUR && stroke == ONE) {
 
-      for (int k = x; k < x + 4; k++) {
+      for (int k = x; k < x + FOUR; k++) {
         if (k < SIZE && newCheck[k][y] == 8) {
           count++;
         }
       }
-      if (count < 3) {
-        for (int k = x - 4; k < x; k++) {
-          if (k >= 0 && newCheck[k][y] == 8) {
+      if (count < THREE) {
+        for (int k = x - FOUR; k < x; k++) {
+          if (k >= NULL && newCheck[k][y] == 8) {
             count++;
           }
         }
       }
-      if (count < 3) {
-        for (int k = y - 4; k < y; k++) {
-          if (k >= 0 && newCheck[x][k] == 8) {
+      if (count < THREE) {
+        for (int k = y - FOUR; k < y; k++) {
+          if (k >= NULL && newCheck[x][k] == 8) {
             count++;
           }
         }
       }
-      if (count < 3) {
-        for (int k = y; k < y + 4; k++) {
+      if (count < THREE) {
+        for (int k = y; k < y + FOUR; k++) {
           if (k < SIZE && newCheck[x][k] == 8) {
             count++;
           }
         }
       }
-      if (count == 3) {
+      if (count == THREE) {
         System.out.println("Четырехпалубный");
         Battleship--;
-        count = 0;
+        count = NULL;
       }
       newCheck[x][y] = 8;
       field[x][y].setStyle("-fx-base: blue");
     }
 
-    if (newCheck[x][y] == 4 && stroke == 2) {
-      for (int k = x + 1; k < x + 4; k++) {
-        if (k < SIZE && newCheck[k][y] == 4) {
+    if (newCheck[x][y] == FOUR && stroke == TWO) {
+      for (int k = x + ONE; k < x + FOUR; k++) {
+        if (k < SIZE && newCheck[k][y] == FOUR) {
           count++;
           newCheck[k][y] = 8;
           field[k][y].setStyle("-fx-base: blue");
         }
       }
-      if (count < 3) {
-        for (int k = x - 4; k < x; k++) {
-          if (k >= 0 && newCheck[k][y] == 4) {
+      if (count < THREE) {
+        for (int k = x - FOUR; k < x; k++) {
+          if (k >= NULL && newCheck[k][y] == FOUR) {
             count++;
             newCheck[k][y] = 8;
             field[k][y].setStyle("-fx-base: blue");
           }
         }
       }
-      if (count < 3) {
-        for (int k = y - 4; k < y; k++) {
-          if (k >= 0 && newCheck[x][k] == 4) {
+      if (count < THREE) {
+        for (int k = y - FOUR; k < y; k++) {
+          if (k >= NULL && newCheck[x][k] == FOUR) {
             count++;
             newCheck[x][k] = 8;
             field[x][k].setStyle("-fx-base: blue");
           }
         }
       }
-      if (count < 3) {
-        for (int k = y + 1; k < y + 4; k++) {
-          if (k < SIZE && newCheck[x][k] == 4) {
+      if (count < THREE) {
+        for (int k = y + ONE; k < y + FOUR; k++) {
+          if (k < SIZE && newCheck[x][k] == FOUR) {
             count++;
             newCheck[x][k] = 8;
             field[x][k].setStyle("-fx-base: blue");
           }
         }
       }
-      if (count == 3) {
+      if (count == THREE) {
         System.out.println("Четырехпалубный"); ////
         Battleship--;
-        count = 0;
+        count = NULL;
       }
       newCheck[x][y] = 8;
       field[x][y].setStyle("-fx-base: blue");
-      field[x][y].setOpacity(0.5);
       System.out.println(count);
     }
     return Battleship;
   }
 
   public int cruiserCheck(Button[][] field, int x, int y, int cruiser) {
-    int count = 0;
-    if (cruiser == 0) {
-      return 0;
+    int count = NULL;
+    if (cruiser == NULL) {
+      return NULL;
     }
-    if (newCheck[x][y] == 3) {
-      for (int k = x; k < x + 3; k++) {
-        if (k < SIZE && newCheck[k][y] == 6) {
+    if (newCheck[x][y] == THREE) {
+      for (int k = x; k < x + THREE; k++) {
+        if (k < SIZE && newCheck[k][y] == SIX) {
           count++;
         }
       }
-      if (count < 2) {
-        for (int k = x - 3; k < x; k++) {
-          if (k >= 0 && newCheck[k][y] == 6) {
+      if (count < TWO) {
+        for (int k = x - THREE; k < x; k++) {
+          if (k >= NULL && newCheck[k][y] == SIX) {
             count++;
           }
         }
       }
-      if (count < 2) {
-        for (int k = y - 3; k < y; k++) {
-          if (k >= 0 && newCheck[x][k] == 6) {
+      if (count < TWO) {
+        for (int k = y - THREE; k < y; k++) {
+          if (k >= NULL && newCheck[x][k] == SIX) {
             count++;
           }
         }
       }
-      if (count < 2) {
-        for (int k = y; k < y + 3; k++) {
-          if (k < SIZE && newCheck[x][k] == 6) {
+      if (count < TWO) {
+        for (int k = y; k < y + THREE; k++) {
+          if (k < SIZE && newCheck[x][k] == SIX) {
             count++;
           }
         }
       }
-      if (count == 2) {
+      if (count == TWO) {
         System.out.println("Трехпалубный"); ////
         cruiser--;
-        count = 0;
+        count = NULL;
       }
-      newCheck[x][y] = 6;
+      newCheck[x][y] = SIX;
       field[x][y].setStyle("-fx-base: green");
     }
     return cruiser;
   }
 
   public int destroyerCheck(Button[][] field, int x, int y, int destroyer) {
-    int count = 0;
-    if (destroyer == 0) {
-      return 0;
+    int count = NULL;
+    if (destroyer == NULL) {
+      return NULL;
     }
-    if (newCheck[x][y] == 2) {
-      for (int k = x; k < x + 2; k++) {
-        if (k < SIZE && newCheck[k][y] == 5) {
+    if (newCheck[x][y] == TWO) {
+      for (int k = x; k < x + TWO; k++) {
+        if (k < SIZE && newCheck[k][y] == FIFE) {
           count++;
         }
       }
-      if (count < 1) {
-        for (int k = x - 2; k < x; k++) {
-          if (k >= 0 && newCheck[k][y] == 5) {
+      if (count < ONE) {
+        for (int k = x - TWO; k < x; k++) {
+          if (k >= NULL && newCheck[k][y] == FIFE) {
             count++;
           }
         }
       }
-      if (count < 1) {
-        for (int k = y - 2; k < y; k++) {
-          if (k >= 0 && newCheck[x][k] == 5) {
+      if (count < ONE) {
+        for (int k = y - TWO; k < y; k++) {
+          if (k >= NULL && newCheck[x][k] == FIFE) {
             count++;
           }
         }
       }
-      if (count < 1) {
-        for (int k = y; k < y + 2; k++) {
-          if (k < SIZE && newCheck[x][k] == 5) {
+      if (count < ONE) {
+        for (int k = y; k < y + TWO; k++) {
+          if (k < SIZE && newCheck[x][k] == FIFE) {
             count++;
           }
         }
       }
-      if (count == 1) {
+      if (count == ONE) {
         System.out.println("Двухпалубный"); ////
         destroyer--;
-        count = 0;
+        count = NULL;
       }
-      newCheck[x][y] = 5;
+      newCheck[x][y] = FIFE;
       field[x][y].setStyle("-fx-base: lightgrey");
     }
     return destroyer;
   }
 
   public int boatCheck(Button[][] field, int x, int y, int boat) {
-    if (boat == 0) {
-      return 0;
+    if (boat == NULL) {
+      return NULL;
     }
-    if (newCheck[x][y] == 1) {
+    if (newCheck[x][y] == ONE) {
       newCheck[x][y] = 9;
       System.out.println("Однопалубный"); ////
       field[x][y].setStyle("-fx-base: yellow");
@@ -401,5 +514,3 @@ public class BattleWithComp extends Ships {
     return boat;
   }
 }
-
-

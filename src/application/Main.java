@@ -16,14 +16,13 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+import static application.Constants.*;
 
-public class Main extends Application { 
-
-  public final static int WIDTH = 900;
-  public final static int HEIGHT = 600;
+public class Main extends Application {
 
   public void start(Stage primaryStage) {
     Pane root = new Pane();
+
     // Create image for the background
     Image background = new Image(getClass().getResourceAsStream("Ship.jpg"));
     ImageView ground = new ImageView(background);
@@ -39,33 +38,41 @@ public class Main extends Application {
 
     MenuItem players = new MenuItem("2 ИГРОКА");
     MenuItem computer = new MenuItem("ИНТЕЛЛЕКТ");
+    MenuItem twoComps = new MenuItem("2 КОМПЬЮТЕРА");
     MenuItem back = new MenuItem("НАЗАД");
-    SubMenu newGameMenu = new SubMenu(players, computer, back);
-    MenuBox menuBox = new MenuBox(mainMenu);
+    SubMenu newGameMenu = new SubMenu(players, computer, twoComps, back);
 
+    MenuItem levelEasy = new MenuItem("ЛЕГКИЙ");
+    MenuItem levelHard = new MenuItem("ТРУДНЫЙ");
+    MenuItem backMenu = new MenuItem("НАЗАД");
+    SubMenu levelMenu = new SubMenu(levelEasy, levelHard, backMenu);
+
+    MenuBox menuBox = new MenuBox(mainMenu);
     newGame.setOnMouseClicked(event -> menuBox.setSubMenu(newGameMenu));
+    computer.setOnMouseClicked(event -> menuBox.setSubMenu(levelMenu));
     exitGame.setOnMouseClicked(event -> System.exit(0));
 
     back.setOnMouseClicked(event -> menuBox.setSubMenu(mainMenu));
-    root.getChildren().addAll(menuBox);
+    backMenu.setOnMouseClicked(event -> menuBox.setSubMenu(mainMenu));
 
-    Scene scene = new Scene(root, WIDTH, HEIGHT);
-    FadeTransition ft = new FadeTransition(Duration.seconds(3), menuBox);
-    ft.setFromValue(0);
-    ft.setToValue(1);
-    ft.play();
+    Scene scene = new Scene(root, WEIGHT, HEIGHT);
+    FadeTransition fadeTrasition = new FadeTransition(Duration.seconds(3), menuBox);
+    fadeTrasition.setFromValue(0);
+    fadeTrasition.setToValue(1);
+    fadeTrasition.play();
     menuBox.setVisible(true);
-    // Create image for the background of window
-    Image background = new Image(getClass().getResourceAsStream("1.jpg"));
-    ImageView ground = new ImageView(background);
-    ground.setLayoutX(750);
-    ground.setFitHeight(140);
-    ground.setFitWidth(140);
-    root.getChildren().add(ground);
 
-    Image background2 = new Image(getClass().getResourceAsStream("5.gif"));
+    // Create image for the background of window for rule
+    Image backgroundForRule = new Image(getClass().getResourceAsStream("1.jpg"));
+    ImageView groundForRule = new ImageView(backgroundForRule);
+    groundForRule.setLayoutX(750);
+    groundForRule.setFitHeight(140);
+    groundForRule.setFitWidth(140);
+    root.getChildren().add(groundForRule);
+
+    Image animation = new Image(getClass().getResourceAsStream("5.gif"));
     primaryStage.setTitle("Морской бой");
-    primaryStage.getIcons().add(background2);
+    primaryStage.getIcons().add(animation);
     primaryStage.setScene(scene);
 
     // Rule of game
@@ -75,30 +82,39 @@ public class Main extends Application {
     // Player game
     players.setOnMouseClicked(event -> {
       Ships ship = new Ships();
-      ship.createField(primaryStage, 0);
+      ship.arrangeShips(primaryStage, NULL);
     });
     // Computer game
-    computer.setOnMouseClicked(event -> {
+    levelEasy.setOnMouseClicked(event -> {
       Ships ship = new Ships();
-      ship.createField(primaryStage, 2);
+      ship.arrangeShips(primaryStage, TWO);
     });
-
+    levelHard.setOnMouseClicked(event -> {
+      Ships ship = new Ships();
+      ship.arrangeShips(primaryStage, TWO);
+    });
+    twoComps.setOnMouseClicked(event -> {
+      TwoComp compGame = new TwoComp();
+      compGame.createBattle(primaryStage);
+    });
+    root.getChildren().addAll(menuBox);
     primaryStage.setResizable(false);
     primaryStage.setFullScreen(false);
     primaryStage.show();
   }
 
   public void createRule(Stage primaryStage, Scene scene) {
-    Pane root1 = new Pane();
 
-    Scene scene1 = new Scene(root1, 794, 563);
-    primaryStage.setScene(scene1);
+    Pane root = new Pane();
+    Scene sceneForRule = new Scene(root, 794, 563);
+    primaryStage.setScene(sceneForRule);
+
     // Create image for background
     Image background = new Image(getClass().getResourceAsStream("img.png"));
     ImageView ground = new ImageView(background);
     ground.setFitHeight(HEIGHT);
-    ground.setFitWidth(WIDTH);
-    root1.getChildren().add(ground);
+    ground.setFitWidth(WEIGHT);
+    root.getChildren().add(ground);
 
     Rectangle comeBack = new Rectangle(130, 25, Color.DARKSALMON);
     comeBack.setOpacity(0.5);
@@ -112,7 +128,7 @@ public class Main extends Application {
         + "\nв одну клетку.\nПосле расстановки начинается\nбой."
         + "Он представляет собой\nпоочередные выстрелы игроков."
         + "\nПри попадании в корабль\nпротивника участник боя\nполучает " + "возможность");
-    Text info2 = new Text(" проведения внеочередного\nвыстрела. Игра заканчивается\nпри "
+    Text infoSecond = new Text(" проведения внеочередного\nвыстрела. Игра заканчивается\nпри "
         + "уничтожении одним\nиз участников всех кораблей\nпротивника. ");
     info.setFill(Color.BLACK);
     info.setOpacity(0.7);
@@ -120,34 +136,34 @@ public class Main extends Application {
     info.setLayoutX(53);
     info.setFont(Font.font("Arial", FontPosture.ITALIC, 16));
 
-    info2.setFill(Color.BLACK);
-    info2.setOpacity(0.7);
-    info2.setLayoutY(310);
-    info2.setLayoutX(400);
-    info2.setFont(Font.font("Arial", FontPosture.ITALIC, 16));
+    infoSecond.setFill(Color.BLACK);
+    infoSecond.setOpacity(0.7);
+    infoSecond.setLayoutY(310);
+    infoSecond.setLayoutX(400);
+    infoSecond.setFont(Font.font("Arial", FontPosture.ITALIC, 16));
 
     Text text = new Text("НАЗАД");
     text.setFill(Color.FIREBRICK);
     text.setLayoutX(325);
     text.setLayoutY(520);
     text.setFont(Font.font("Arial", FontPosture.ITALIC, 16));
-    root1.getChildren().addAll(info, text, info2, comeBack);
+    root.getChildren().addAll(info, text, infoSecond, comeBack);
 
-    FillTransition st = new FillTransition(Duration.seconds(0.5), comeBack);
-    comeBack.setOnMouseEntered(event2 -> {
-      st.setFromValue(Color.YELLOW);
-      st.setToValue(Color.CORNSILK);
-      st.setCycleCount(Animation.INDEFINITE);
-      st.setAutoReverse(true);
-      st.play();
+    FillTransition trasition = new FillTransition(Duration.seconds(0.5), comeBack);
+    comeBack.setOnMouseEntered(event -> {
+      trasition.setFromValue(Color.YELLOW);
+      trasition.setToValue(Color.CORNSILK);
+      trasition.setCycleCount(Animation.INDEFINITE);
+      trasition.setAutoReverse(true);
+      trasition.play();
     });
 
-    comeBack.setOnMouseExited(event3 -> {
-      st.stop();
+    comeBack.setOnMouseExited(event -> {
+      trasition.stop();
       comeBack.setFill(Color.DARKSALMON);
     });
 
-    comeBack.setOnMouseClicked(event1 -> {
+    comeBack.setOnMouseClicked(event -> {
       primaryStage.setScene(scene);
     });
   }
@@ -164,16 +180,16 @@ public class Main extends Application {
       text.setFont(Font.font("Arial", FontPosture.ITALIC, 16));
       setAlignment(Pos.CENTER);
       getChildren().addAll(choice, text);
-      FillTransition st = new FillTransition(Duration.seconds(0.5), choice);
+      FillTransition trasition = new FillTransition(Duration.seconds(0.5), choice);
       setOnMouseEntered(event -> {
-        st.setFromValue(Color.YELLOW);
-        st.setToValue(Color.CORNSILK);
-        st.setCycleCount(Animation.INDEFINITE);
-        st.setAutoReverse(true);
-        st.play();
+        trasition.setFromValue(Color.YELLOW);
+        trasition.setToValue(Color.CORNSILK);
+        trasition.setCycleCount(Animation.INDEFINITE);
+        trasition.setAutoReverse(true);
+        trasition.play();
       });
       setOnMouseExited(event -> {
-        st.stop();
+        trasition.stop();
         choice.setFill(Color.DARKSALMON);
       });
     }
@@ -186,7 +202,7 @@ public class Main extends Application {
       MenuBox.subMenu = subMenu;
 
       setVisible(false);
-      Rectangle choice = new Rectangle(WIDTH, HEIGHT);
+      Rectangle choice = new Rectangle(WEIGHT, HEIGHT);
       choice.setOpacity(0.0);
       getChildren().addAll(choice, subMenu);
     }
