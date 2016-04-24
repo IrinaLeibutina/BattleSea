@@ -60,11 +60,11 @@ public class BattleWithComp extends Ships {
     battle.getChildren().addAll(win);
 
     Rectangle repeat = new Rectangle(150, 25, Color.DARKSALMON);
-    repeat.setOpacity(0.5);
+    repeat.setOpacity(TRANSPARENCY);
 
     repeat.setLayoutX(450);
     repeat.setLayoutY(550);
-    FillTransition fillTrasition = new FillTransition(Duration.seconds(0.5), repeat);
+    FillTransition fillTrasition = new FillTransition(Duration.seconds(TRANSPARENCY), repeat);
     repeat.setOnMouseEntered(event -> {
       fillTrasition.setFromValue(Color.YELLOW);
       fillTrasition.setToValue(Color.CORNSILK);
@@ -109,12 +109,12 @@ public class BattleWithComp extends Ships {
     }
 
     Rectangle repeat = new Rectangle(150, 25, Color.DARKSALMON);
-    repeat.setOpacity(0.5);
+    repeat.setOpacity(TRANSPARENCY);
 
     repeat.setLayoutX(450);
     repeat.setLayoutY(550);
 
-    FillTransition fillTrasition = new FillTransition(Duration.seconds(0.5), repeat);
+    FillTransition fillTrasition = new FillTransition(Duration.seconds(TRANSPARENCY), repeat);
     repeat.setOnMouseEntered(event -> {
       fillTrasition.setFromValue(Color.YELLOW);
       fillTrasition.setToValue(Color.CORNSILK);
@@ -153,19 +153,15 @@ public class BattleWithComp extends Ships {
       for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j < SIZE; j++) {
 
-          if (boat1 == NULL && battleship1 == NULL && cruiser1 == NULL && destroyer1 == NULL
-              && key == NULL) {
+          if (boat1 == NULL && battleship1 == NULL && cruiser1 == NULL && destroyer1 == NULL) {
             win.setText("Комрьютер победил!!!");
             battle.getChildren().add(win);
             System.out.println("Второй ");
-            key++;
             return;
           }
-          if (boat2 == NULL && battleship2 == NULL && cruiser2 == NULL && destroyer2 == NULL
-              && key == NULL) {
+          if (boat2 == NULL && battleship2 == NULL && cruiser2 == NULL && destroyer2 == NULL) {
             win.setText("Игрок Победил!!!");
             battle.getChildren().addAll(win);
-            key++;
             System.out.println("Первый");
             return;
           }

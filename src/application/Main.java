@@ -40,7 +40,7 @@ public class Main extends Application {
     MenuItem computer = new MenuItem("ÈÍÒÅËËÅÊÒ");
     MenuItem twoComps = new MenuItem("2 ÊÎÌÏÜÞÒÅÐÀ");
     MenuItem back = new MenuItem("ÍÀÇÀÄ");
-    SubMenu newGameMenu = new SubMenu(players, computer, twoComps, back);
+    SubMenu newGameMenu = new SubMenu(players, twoComps, back); // computer
 
     MenuItem levelEasy = new MenuItem("ËÅÃÊÈÉ");
     MenuItem levelHard = new MenuItem("ÒÐÓÄÍÛÉ");
@@ -110,14 +110,14 @@ public class Main extends Application {
     primaryStage.setScene(sceneForRule);
 
     // Create image for background
-    Image background = new Image(getClass().getResourceAsStream("img.png"));
+    Image background = new Image(getClass().getResourceAsStream("backgroundForRules.png"));
     ImageView ground = new ImageView(background);
     ground.setFitHeight(HEIGHT);
     ground.setFitWidth(WEIGHT);
     root.getChildren().add(ground);
 
     Rectangle comeBack = new Rectangle(130, 25, Color.DARKSALMON);
-    comeBack.setOpacity(0.5);
+    comeBack.setOpacity(TRANSPARENCY);
     comeBack.setLayoutX(290);
     comeBack.setLayoutY(500);
 
@@ -149,7 +149,7 @@ public class Main extends Application {
     text.setFont(Font.font("Arial", FontPosture.ITALIC, 16));
     root.getChildren().addAll(info, text, infoSecond, comeBack);
 
-    FillTransition trasition = new FillTransition(Duration.seconds(0.5), comeBack);
+    FillTransition trasition = new FillTransition(Duration.seconds(TRANSPARENCY), comeBack);
     comeBack.setOnMouseEntered(event -> {
       trasition.setFromValue(Color.YELLOW);
       trasition.setToValue(Color.CORNSILK);
@@ -171,7 +171,7 @@ public class Main extends Application {
   private static class MenuItem extends StackPane {
     public MenuItem(String name) {
       Rectangle choice = new Rectangle(200, 25, Color.DARKSALMON);
-      choice.setOpacity(0.5);
+      choice.setOpacity(TRANSPARENCY);
 
       Text text = new Text(name);
       text.setFill(Color.FIREBRICK);
@@ -180,7 +180,7 @@ public class Main extends Application {
       text.setFont(Font.font("Arial", FontPosture.ITALIC, 16));
       setAlignment(Pos.CENTER);
       getChildren().addAll(choice, text);
-      FillTransition trasition = new FillTransition(Duration.seconds(0.5), choice);
+      FillTransition trasition = new FillTransition(Duration.seconds(TRANSPARENCY), choice);
       setOnMouseEntered(event -> {
         trasition.setFromValue(Color.YELLOW);
         trasition.setToValue(Color.CORNSILK);

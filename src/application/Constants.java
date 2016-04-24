@@ -19,8 +19,13 @@ public class Constants {
   public static final int THREE = 3;
   public static final int SIX = 6;
   public static final int FIFE = 5;
+  public static final int FORTY = 40;
+  public static final int THIRTY = 30;
 
-  public static int key = 0;
+  public static final double TRANSPARENCY = 0.5;
+  public static double REMOVAL_FIRST_FIELD = 1.8;
+  public static double REMOVAL_SECOND_FIELD = 1.5;
+
   public static int battleship1 = 1;
   public static int cruiser1 = 2;
   public static int destroyer1 = 3;

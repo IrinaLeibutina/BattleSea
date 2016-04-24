@@ -17,32 +17,31 @@ import javafx.util.Duration;
 import static application.Constants.*;
 
 public class Interface {
-  
+
   Text createTextForButton() {
-    Text text = new Text("ÂÏÅÐÅÄ");
-    text.setFill(Color.FIREBRICK);
-    text.setOpacity(0.7);
-    text.setFont(Font.font("Arial", FontPosture.ITALIC, 16));
-    text.setLayoutX(785);
-    text.setLayoutY(568);
-    return text;
+    Text textForButton = new Text("ÂÏÅÐÅÄ");
+    textForButton.setFill(Color.FIREBRICK);
+    textForButton.setOpacity(0.7);
+    textForButton.setFont(Font.font("Arial", FontPosture.ITALIC, 16));
+    textForButton.setLayoutX(785);
+    textForButton.setLayoutY(568);
+    return textForButton;
   }
 
   ImageView createBackground() {
-    Image imgage = new Image(getClass().getResourceAsStream("Fon.jpg"));
-    ImageView img5 = new ImageView(imgage);
-    img5.setFitHeight(HEIGHT);
-    img5.setFitWidth(WEIGHT);
-    return img5;
+    Image background = new Image(getClass().getResourceAsStream("Fon.jpg"));
+    ImageView ground = new ImageView(background);
+    ground.setFitHeight(HEIGHT);
+    ground.setFitWidth(WEIGHT);
+    return ground;
   }
 
   Rectangle createRectangle() {
     Rectangle choice = new Rectangle(130, 25, Color.DARKSALMON);
-    choice.setOpacity(0.5);
-
+    choice.setOpacity(TRANSPARENCY);
     choice.setLayoutX(750);
     choice.setLayoutY(550);
-    FillTransition fillTrasition = new FillTransition(Duration.seconds(0.5), choice);
+    FillTransition fillTrasition = new FillTransition(Duration.seconds(TRANSPARENCY), choice);
     choice.setOnMouseEntered(event -> {
       fillTrasition.setFromValue(Color.YELLOW);
       fillTrasition.setToValue(Color.CORNSILK);
@@ -58,28 +57,28 @@ public class Interface {
   }
 
   Text createTextForComeBack() {
-    Text text = new Text("ÍÀÇÀÄ");
-    text.setFill(Color.FIREBRICK);
-    text.setFont(Font.font("Arial", FontPosture.ITALIC, 16));
-    text.setLayoutX(785);
-    text.setLayoutY(568);
-    return text;
+    Text textForComeback = new Text("ÍÀÇÀÄ");
+    textForComeback.setFill(Color.FIREBRICK);
+    textForComeback.setFont(Font.font("Arial", FontPosture.ITALIC, 16));
+    textForComeback.setLayoutX(785);
+    textForComeback.setLayoutY(568);
+    return textForComeback;
   }
 
   Text createInfoForUser() {
-    Text text = new Text("Êîìïüþòåð \nðàññòàâèë\n êîðàáëè");
-    text.setFill(Color.FIREBRICK);
-    text.setOpacity(0.7);
-    text.setFont(Font.font("Arial", FontPosture.ITALIC, 32));
-    text.setLayoutX(170);
-    text.setLayoutY(210);
-    return text;
+    Text textForUser = new Text("Êîìïüþòåð \nðàññòàâèë\n êîðàáëè");
+    textForUser.setFill(Color.FIREBRICK);
+    textForUser.setOpacity(0.7);
+    textForUser.setFont(Font.font("Arial", FontPosture.ITALIC, 32));
+    textForUser.setLayoutX(170);
+    textForUser.setLayoutY(210);
+    return textForUser;
   }
 
   public static class MenuItem extends StackPane {
     public MenuItem(String name) {
       Rectangle choice = new Rectangle(220, 28, Color.LIGHTBLUE);
-      choice.setOpacity(0.5);
+      choice.setOpacity(TRANSPARENCY);
 
       Text text = new Text(name);
       text.setFill(Color.FIREBRICK);
@@ -89,7 +88,7 @@ public class Interface {
       setAlignment(Pos.CENTER);
       getChildren().addAll(choice, text);
 
-      FillTransition fillTrasition = new FillTransition(Duration.seconds(0.5), choice);
+      FillTransition fillTrasition = new FillTransition(Duration.seconds(TRANSPARENCY), choice);
       choice.setOnMouseEntered(event -> {
         fillTrasition.setFromValue(Color.YELLOW);
         fillTrasition.setToValue(Color.CORNSILK);
@@ -107,9 +106,9 @@ public class Interface {
   public static class MenuBox extends Pane {
     public MenuBox(Menu subMenu) {
       setVisible(false);
-      Rectangle bg = new Rectangle(WEIGHT, HEIGHT);
-      bg.setOpacity(0.0);
-      getChildren().addAll(bg, subMenu);
+      Rectangle rectangleForButton = new Rectangle(WEIGHT, HEIGHT);
+      rectangleForButton.setOpacity(0.0);
+      getChildren().addAll(rectangleForButton, subMenu);
     }
   }
 

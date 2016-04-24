@@ -23,18 +23,15 @@ import static application.Constants.*;
  * ends in the destruction of one of the participants of all the enemy ships.
  */
 
-
 public class Battle extends Ships {
 
   public boolean first = false;
   public boolean second = true;
   Button[][] field = new Button[SIZE][SIZE];
   Field fieldForBattle = new Field();
-  Button[][] firstField = fieldForBattle.createFieldForBattle(1);
-  Button[][] secondField = fieldForBattle.createFieldForBattle(2);
+  Button[][] firstField = fieldForBattle.createFieldForBattle(ONE);
+  Button[][] secondField = fieldForBattle.createFieldForBattle(TWO);
   Interface inter;
-  public int some = 0;
-  // Field fieldForBattle;
 
   public Battle() {
     for (int i = 0; i < SIZE; i++) {
@@ -46,7 +43,6 @@ public class Battle extends Ships {
         saveSecondBattle[i][j] = 0;
       }
     }
-    // fieldForBattle = new Field();
     inter = new Interface();
   }
 
@@ -68,10 +64,10 @@ public class Battle extends Ships {
     battle.getChildren().addAll(win);
 
     Rectangle repeat = new Rectangle(150, 25, Color.DARKSALMON);
-    repeat.setOpacity(0.5);
+    repeat.setOpacity(TRANSPARENCY);
     repeat.setLayoutX(450);
     repeat.setLayoutY(550);
-    FillTransition fillTrasition = new FillTransition(Duration.seconds(0.5), repeat);
+    FillTransition fillTrasition = new FillTransition(Duration.seconds(TRANSPARENCY), repeat);
     repeat.setOnMouseEntered(event -> {
       fillTrasition.setFromValue(Color.YELLOW);
       fillTrasition.setToValue(Color.CORNSILK);
@@ -84,14 +80,13 @@ public class Battle extends Ships {
       repeat.setFill(Color.DARKSALMON);
     });
 
-    Text text = new Text("ПОВТОР ИГРЫ");
-    text.setFill(Color.FIREBRICK);
+    Text replay = new Text("ПОВТОР ИГРЫ");
+    replay.setFill(Color.FIREBRICK);
+    replay.setFont(Font.font("Arial", FontPosture.ITALIC, 16));
+    replay.setLayoutX(470);
+    replay.setLayoutY(568);
 
-    text.setFont(Font.font("Arial", FontPosture.ITALIC, 16));
-    text.setLayoutX(470);
-    text.setLayoutY(568);
-
-    battle.getChildren().addAll(text, repeat);
+    battle.getChildren().addAll(replay, repeat);
 
     repeat.setOnMouseClicked(event -> {
       getInterface(battle, primaryStage);
@@ -103,19 +98,29 @@ public class Battle extends Ships {
     primaryStage.show();
   }
 
-
   public void repeat(Pane battle, Stage primaryStage) {
     for (int i = 0; i < SIZE; i++) {
       for (int j = 0; j < SIZE; j++) {
         battle.getChildren().addAll(firstField[i][j], secondField[i][j]);
       }
     }
+    // Update
+    first = false;
+    second = false;
+    boat1 = FOUR;
+    destroyer1 = THREE;
+    cruiser1 = TWO;
+    battleship1 = ONE;
+    boat2 = FOUR;
+    destroyer2 = THREE;
+    cruiser2 = TWO;
+    battleship2 = ONE;
 
     Rectangle repeat = new Rectangle(150, 25, Color.DARKSALMON);
-    repeat.setOpacity(0.5);
+    repeat.setOpacity(TRANSPARENCY);
     repeat.setLayoutX(450);
     repeat.setLayoutY(550);
-    FillTransition fillTrasition = new FillTransition(Duration.seconds(0.5), repeat);
+    FillTransition fillTrasition = new FillTransition(Duration.seconds(TRANSPARENCY), repeat);
     repeat.setOnMouseEntered(event -> {
       fillTrasition.setFromValue(Color.YELLOW);
       fillTrasition.setToValue(Color.CORNSILK);
@@ -128,13 +133,36 @@ public class Battle extends Ships {
       repeat.setFill(Color.DARKSALMON);
     });
 
-    Text text = new Text("ПОВТОР ИГРЫ");
-    text.setFill(Color.FIREBRICK);
+    Rectangle getWinner = new Rectangle(150, 25, Color.DARKSALMON);
+    getWinner.setOpacity(TRANSPARENCY);
+    getWinner.setLayoutX(150);
+    getWinner.setLayoutY(550);
+    FillTransition fillTrasitionSecond =
+        new FillTransition(Duration.seconds(TRANSPARENCY), getWinner);
+    getWinner.setOnMouseEntered(event -> {
+      fillTrasitionSecond.setFromValue(Color.YELLOW);
+      fillTrasitionSecond.setToValue(Color.CORNSILK);
+      fillTrasitionSecond.setCycleCount(Animation.INDEFINITE);
+      fillTrasitionSecond.setAutoReverse(true);
+      fillTrasitionSecond.play();
+    });
+    getWinner.setOnMouseExited(event -> {
+      fillTrasitionSecond.stop();
+      getWinner.setFill(Color.DARKSALMON);
+    });
 
-    text.setFont(Font.font("Arial", FontPosture.ITALIC, 16));
-    text.setLayoutX(460);
-    text.setLayoutY(568);
-    battle.getChildren().addAll(text, repeat);
+    Text replay = new Text("ПОВТОР ИГРЫ");
+    replay.setFill(Color.FIREBRICK);
+    replay.setFont(Font.font("Arial", FontPosture.ITALIC, 16));
+    replay.setLayoutX(460);
+    replay.setLayoutY(568);
+
+    Text winner = new Text("ПОБЕДИТЕЛЬ");
+    winner.setFill(Color.FIREBRICK);
+    winner.setFont(Font.font("Arial", FontPosture.ITALIC, 16));
+    winner.setLayoutX(166);
+    winner.setLayoutY(568);
+    battle.getChildren().addAll(replay, repeat, winner, getWinner);
 
     Text win = new Text();
     win.setLayoutX(330);
@@ -151,6 +179,22 @@ public class Battle extends Ships {
         e.printStackTrace();
       }
     });
+
+    getWinner.setOnMouseClicked(event -> {
+      if (boat1 == NULL && battleship1 == NULL && cruiser1 == NULL && destroyer1 == NULL) {
+        System.out.println("Второй ");
+        win.setText("Победил Второй игрок!!!");
+        battle.getChildren().addAll(win);
+        return;
+      }
+      if (boat2 == NULL && battleship2 == NULL && cruiser2 == NULL && destroyer2 == NULL) {
+
+        System.out.println("Первый");
+        win.setText("Победил Первый игрок!!!");
+        battle.getChildren().addAll(win);
+        return;
+      }
+    });
   }
 
   public void getInterface(Pane battle, Stage primaryStage) {
@@ -165,12 +209,11 @@ public class Battle extends Ships {
       mainMenu.start(primaryStage);
     });
 
-    Text text = inter.createTextForComeBack();
-    battle.getChildren().addAll(text, comeBack);
+    Text name = inter.createTextForComeBack();
+    battle.getChildren().addAll(name, comeBack);
   }
 
   public void BeginBattle(Pane battle, Stage primaryStage) {
-
     // Create field for battle
     Button[][] firstField = fieldForBattle.createFieldForBattle(ONE);
     Button[][] secondField = fieldForBattle.createFieldForBattle(TWO);
@@ -180,6 +223,16 @@ public class Battle extends Ships {
         battle.getChildren().addAll(firstField[i][j], secondField[i][j]);
       }
     }
+    // Update
+    boat1 = FOUR;
+    destroyer1 = THREE;
+    cruiser1 = TWO;
+    battleship1 = ONE;
+    boat2 = FOUR;
+    destroyer2 = THREE;
+    cruiser2 = TWO;
+    battleship2 = ONE;
+    positionFirst = NULL;
 
     Text win = new Text();
     win.setLayoutX(330);
@@ -201,7 +254,7 @@ public class Battle extends Ships {
               win.setText("Второй Игрок Победил!!!");
               playGame(primaryStage, win);
               save.saveArrayToFile(saveFirstField, saveSecondField, saveFirstBattle,
-                  saveSecondBattle, "d:\\Replay.txt");
+                  saveSecondBattle, "d:\\Players.txt");
 
               /// For Check
               for (int s = 0; s < SIZE; s++) {
@@ -210,7 +263,7 @@ public class Battle extends Ships {
                   System.out.print(saveFirstField[s][z]);
                 }
               }
-              System.out.println("ПЕрвоначальная");
+              System.out.println("Первоначальная");
               for (int s = 0; s < SIZE; s++) {
                 System.out.println(" ");
                 for (int z = 0; z < SIZE; z++) {
@@ -257,7 +310,7 @@ public class Battle extends Ships {
               win.setText("Первый Игрок Победил!!!");
               playGame(primaryStage, win);
               save.saveArrayToFile(saveFirstField, saveSecondField, saveFirstBattle,
-                  saveSecondBattle, "d:\\Rеplay.txt");
+                  saveSecondBattle, "d:\\Players.txt");
               return;
             }
 
@@ -446,10 +499,8 @@ public class Battle extends Ships {
   }
 
   class MyThread extends Thread {
-    // Update
-    int winner = 0;
-
     public void run() {
+      // Update
       boat1 = FOUR;
       destroyer1 = THREE;
       cruiser1 = TWO;
@@ -458,22 +509,15 @@ public class Battle extends Ships {
       destroyer2 = THREE;
       cruiser2 = TWO;
       battleship2 = ONE;
+      positionSecond = 1;
       for (int i = NULL; i < SIZE; i++) {
         for (int j = NULL; j < SIZE; j++) {
 
-          if (boat1 == NULL && battleship1 == NULL && cruiser1 == NULL && destroyer1 == NULL
-              && key == NULL) {
-            // win.setText("Второй Игрок Победил!!!");
-            // battle.getChildren().add(win);
+          if (boat1 == NULL && battleship1 == NULL && cruiser1 == NULL && destroyer1 == NULL) {
             System.out.println("Второй ");
-            winner = 1;
             return;
           }
-          if (boat2 == NULL && battleship2 == NULL && cruiser2 == NULL && destroyer2 == NULL
-              && key == NULL) {
-            // win.setText("Первый Игрок Победил!!!");
-            // battle.getChildren().addAll(win);
-            winner = 2;
+          if (boat2 == NULL && battleship2 == NULL && cruiser2 == NULL && destroyer2 == NULL) {
             System.out.println("Первый");
             return;
           }
@@ -499,7 +543,7 @@ public class Battle extends Ships {
             i = NULL;
             j = NULL;
             try {
-              Thread.sleep(300); 
+              Thread.sleep(300);
             } catch (InterruptedException e) {
             }
           }
@@ -524,18 +568,14 @@ public class Battle extends Ships {
             i = NULL;
             j = NULL;
             try {
-              Thread.sleep(300); 
+              Thread.sleep(300);
             } catch (InterruptedException e) {
             }
           }
-
         }
       }
     }
-
-    public int getKey() {
-      System.out.println("getKey = " + winner);
-      return winner;
-    }
   }
 }
+
+

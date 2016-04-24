@@ -8,10 +8,10 @@ import java.io.IOException;
 import static application.Constants.*;
 
 public class Save {
-  public void printArray(int[][] arr) {
-    for (int i = 0; i < 40; i++) {
-      for (int j = 0; j < 10; j++) {
-        System.out.print(arr[i][j] + " ");
+  public void printArray(int[][] saveInformation) {
+    for (int i = 0; i < FORTY; i++) {
+      for (int j = 0; j < SIZE; j++) {
+        System.out.print(saveInformation[i][j] + " ");
       }
       System.out.println();
     }
@@ -56,15 +56,16 @@ public class Save {
   }
 
   public int[][] loadArrayFromFile(String path, int key) {
-    int[][] read = new int[40][40];
+    int[][] read = new int[FORTY][FORTY];
     int[][] firstField = new int[SIZE][SIZE];
     int[][] secondField = new int[SIZE][SIZE];
     int[][] firstBattle = new int[SIZE][SIZE];
     int[][] secondBattle = new int[SIZE][SIZE];
+
     try (BufferedReader bufReader = new BufferedReader(new FileReader(path))) {
-      for (int i = 0; i < 40; i++) {
+      for (int i = 0; i < FORTY; i++) {
         String[] strArr = bufReader.readLine().trim().split(" ");
-        for (int j = 0; j < 10; j++) {
+        for (int j = 0; j < SIZE; j++) {
           read[i][j] = Integer.parseInt(strArr[j]);
         }
       }
@@ -74,25 +75,25 @@ public class Save {
 
     for (int i = 0; i < SIZE; i++) {
       for (int j = 0; j < SIZE; j++) {
-        firstField[i][j] = read[i][j];
+        firstField[j][i] = read[i][j];
       }
     }
 
-    for (int i = 0; i < SIZE; i++) {
-      for (int j = 10; j < SIZE * 2; j++) {
-        secondField[i][j] = read[i][j];
+    for (int i = SIZE, ch = 0; i < SIZE * TWO; ch++, i++) {
+      for (int j = 0; j < SIZE; j++) {
+        secondField[j][ch] = read[i][j];
       }
     }
 
-    for (int i = 0; i < SIZE; i++) {
-      for (int j = 10; j < SIZE * 3; j++) {
-        firstBattle[i][j] = read[i][j];
+    for (int i = SIZE * TWO, ch = 0; i < SIZE * THREE; ch++, i++) {
+      for (int j = 0; j < SIZE; j++) {
+        firstBattle[j][ch] = read[i][j];
       }
     }
 
-    for (int i = 0; i < SIZE; i++) {
-      for (int j = 10; j < SIZE * 4; j++) {
-        secondBattle[i][j] = read[i][j];
+    for (int i = SIZE * THREE, ch = 0; i < SIZE * FOUR; ch++, i++) {
+      for (int j = 0; j < SIZE; j++) {
+        secondBattle[j][ch] = read[i][j];
       }
     }
     if (key == ONE) {
@@ -102,6 +103,7 @@ public class Save {
       return secondField;
     }
     if (key == THREE) {
+
       return firstBattle;
     }
     if (key == FOUR) {

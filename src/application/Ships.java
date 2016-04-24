@@ -192,17 +192,17 @@ public class Ships {
         ship[i][j].setStyle("-fx-base: lightgreen");
       }
     }
-    for (int i = NULL; i < BATTLESHIP; i++) {
-      i = setBattleship(ship, i, buttle);
+    for (int numberOfShips = NULL; numberOfShips < BATTLESHIP; numberOfShips++) {
+      numberOfShips = setBattleship(ship, numberOfShips, buttle);
     }
-    for (int i = NULL; i < CRUISER; i++) {
-      i = setCruiser(ship, i, buttle);
+    for (int numberOfShips = NULL; numberOfShips < CRUISER; numberOfShips++) {
+      numberOfShips = setCruiser(ship, numberOfShips, buttle);
     }
-    for (int i = NULL; i < DESTROYER; i++) {
-      i = setDestroyer(ship, i, buttle);
+    for (int numberOfShips = NULL; numberOfShips < DESTROYER; numberOfShips++) {
+      numberOfShips = setDestroyer(ship, numberOfShips, buttle);
     }
-    for (int i = ONE; i < BOAT + ONE; i++) {
-      i = setBoat(ship, i, buttle);
+    for (int numberOfShips = ONE; numberOfShips < BOAT + ONE; numberOfShips++) {
+      numberOfShips = setBoat(ship, numberOfShips, buttle);
     }
   }
 
@@ -211,7 +211,7 @@ public class Ships {
   // where boats may be arranged.Break it to function probably does
   // not make sense, because each test uses a different location.
 
-  public int setBattleship(Button[][] ship, int i, int buttle) {
+  public int setBattleship(Button[][] ship, int numberOfShips, int buttle) {
     SecureRandom rand = new SecureRandom();
     int choice = (rand.nextInt(TWO));
     int x = (rand.nextInt(SIZE - ONE)); // Coordinates
@@ -220,7 +220,7 @@ public class Ships {
     if (choice == NULL) {
 
       if (y + FOUR > SIZE) {
-        i = i - ONE;
+        numberOfShips = numberOfShips - ONE;
       } else
         for (int k = y; k < y + FOUR; k++) {
           setShipColor(ship, x, k, buttle);
@@ -229,17 +229,17 @@ public class Ships {
       // Horizontally ship
     } else if (choice == ONE) {
       if (x + FOUR > SIZE) {
-        i = i - ONE;
+        numberOfShips = numberOfShips - ONE;
       } else
         for (int k = x; k < x + FOUR; k++) {
           setShipColor(ship, k, y, buttle);
           checkForShip[k][y] = FOUR;
         }
     }
-    return i;
+    return numberOfShips;
   }
 
-  public int setCruiser(Button[][] ship, int i, int buttle) {
+  public int setCruiser(Button[][] ship, int numberOfShips, int buttle) {
     SecureRandom rand = new SecureRandom();
     int choice = (rand.nextInt(TWO));
     int x = (rand.nextInt(SIZE));
@@ -247,7 +247,7 @@ public class Ships {
     // vertical
     if (choice == NULL) {
       if (y + THREE > SIZE) {
-        i = i - ONE;
+        numberOfShips = numberOfShips - ONE;
       } else {
         int flag = NULL;
         if (x == NULL) {
@@ -258,7 +258,7 @@ public class Ships {
                 || checkForShip[x][k] == TWO || checkForShip[x][k] == FOUR
                 || checkForShip[chONE][k] == TWO || checkForShip[chONE][k] == FOUR
                 || checkForShip[chONE][k] == THREE || checkForShip[x][k] == THREE) {
-              i = i - ONE;
+              numberOfShips = numberOfShips - ONE;
               flag = ONE;
               k = y + FOUR;
             }
@@ -278,7 +278,7 @@ public class Ships {
                   || checkForShip[x][k] == TWO || checkForShip[x][k] == FOUR
                   || checkForShip[chONE][k] == TWO || checkForShip[x][k] == FOUR
                   || checkForShip[chONE][k] == FOUR || checkForShip[chONE][k] == THREE) {
-                i = i - ONE;
+                numberOfShips = numberOfShips - ONE;
                 flag = ONE;
                 k = y + FOUR;
               }
@@ -301,7 +301,7 @@ public class Ships {
                   || checkForShip[x][k] == FOUR || checkForShip[chONE][k] == FOUR
                   || checkForShip[chTWO][k] == FOUR || checkForShip[x][k] == THREE
                   || checkForShip[chONE][k] == THREE || checkForShip[chTWO][k] == THREE) {
-                i = i - ONE;
+                numberOfShips = numberOfShips - ONE;
                 flag = ONE;
                 k = y + FOUR;
               }
@@ -321,7 +321,7 @@ public class Ships {
       x = (ONE + rand.nextInt(6));
       y = (rand.nextInt(SIZE));
       if (x + THREE > SIZE) {
-        i = i - ONE;
+        numberOfShips = numberOfShips - ONE;
       } else {
         int flag = NULL;
         if (y == NULL) {
@@ -332,7 +332,7 @@ public class Ships {
                 || checkForShip[k][y] == TWO || checkForShip[k][chONE] == TWO
                 || checkForShip[k][y] == THREE || checkForShip[k][chONE] == THREE
                 || checkForShip[k][y] == FOUR || checkForShip[k][chONE] == FOUR) {
-              i = i - ONE;
+              numberOfShips = numberOfShips - ONE;
               flag = ONE;
               k = x + FOUR;
             }
@@ -352,7 +352,7 @@ public class Ships {
                   || checkForShip[k][y] == TWO || checkForShip[k][chONE] == TWO
                   || checkForShip[k][y] == THREE || checkForShip[k][y] == FOUR
                   || checkForShip[k][chONE] == THREE || checkForShip[k][chONE] == FOUR) {
-                i = i - ONE;
+                numberOfShips = numberOfShips - ONE;
                 flag = ONE;
                 k = x + FOUR;
               }
@@ -374,7 +374,7 @@ public class Ships {
                   || checkForShip[k][y] == THREE || checkForShip[k][chONE] == THREE
                   || checkForShip[k][chTWO] == THREE || checkForShip[k][y] == FOUR
                   || checkForShip[k][chONE] == FOUR || checkForShip[k][chTWO] == FOUR) {
-                i = i - ONE;
+                numberOfShips = numberOfShips - ONE;
                 flag = ONE;
                 k = x + FOUR;
               }
@@ -390,18 +390,18 @@ public class Ships {
         }
       }
     }
-    return i;
+    return numberOfShips;
   }
 
-  public int setDestroyer(Button[][] ship, int i, int buttle) {
+  public int setDestroyer(Button[][] ship, int numberOfShips, int buttle) {
     SecureRandom rand = new SecureRandom();
     int choice = (rand.nextInt(TWO));
-    int x = (rand.nextInt(SIZE)); // x
-    int y = (ONE + rand.nextInt(7)); // y
+    int x = (rand.nextInt(SIZE));
+    int y = (ONE + rand.nextInt(7));
 
     if (choice == NULL) {
       if (y + TWO > SIZE) {
-        i = i - ONE;
+        numberOfShips = numberOfShips - ONE;
       } else {
         int flag = NULL;
         if (x == NULL) {
@@ -413,7 +413,7 @@ public class Ships {
                 || checkForShip[x][k] == TWO || checkForShip[chONE][k] == TWO
                 || checkForShip[x][k] == THREE || checkForShip[chONE][k] == THREE
                 || checkForShip[x][k] == FOUR || checkForShip[chONE][k] == FOUR) {
-              i = i - ONE;
+              numberOfShips = numberOfShips - ONE;
               flag = ONE;
               k = y + THREE;
             }
@@ -433,7 +433,7 @@ public class Ships {
                   || checkForShip[x][k] == TWO || checkForShip[chONE][k] == TWO
                   || checkForShip[x][k] == THREE || checkForShip[chONE][k] == FOUR
                   || checkForShip[chONE][k] == THREE || checkForShip[x][k] == FOUR) {
-                i = i - ONE;
+                numberOfShips = numberOfShips - ONE;
                 flag = ONE;
                 k = y + THREE;
               }
@@ -455,7 +455,7 @@ public class Ships {
                   || checkForShip[x][k] == THREE || checkForShip[chONE][k] == THREE
                   || checkForShip[chTWO][k] == THREE || checkForShip[x][k] == FOUR
                   || checkForShip[chONE][k] == FOUR || checkForShip[chTWO][k] == FOUR) {
-                i = i - ONE;
+                numberOfShips = numberOfShips - ONE;
                 flag = ONE;
                 k = y + THREE;
               }
@@ -475,7 +475,7 @@ public class Ships {
       x = (ONE + rand.nextInt(7));
       y = (rand.nextInt(SIZE));
       if (x + TWO > SIZE) {
-        i = i - ONE;
+        numberOfShips = numberOfShips - ONE;
       } else {
         int flag = NULL;
         if (y == NULL) {
@@ -486,7 +486,7 @@ public class Ships {
                 || checkForShip[k][y] == TWO || checkForShip[k][chONE] == TWO
                 || checkForShip[k][y] == THREE || checkForShip[k][chONE] == THREE
                 || checkForShip[k][y] == FOUR || checkForShip[k][chONE] == FOUR) {
-              i = i - ONE;
+              numberOfShips = numberOfShips - ONE;
               flag = ONE;
               k = x + THREE;
             }
@@ -506,7 +506,7 @@ public class Ships {
                   || checkForShip[k][y] == TWO || checkForShip[k][chONE] == TWO
                   || checkForShip[k][y] == THREE || checkForShip[k][chONE] == THREE
                   || checkForShip[k][y] == FOUR || checkForShip[k][chONE] == FOUR) {
-                i = i - ONE;
+                numberOfShips = numberOfShips - ONE;
                 flag = ONE;
                 k = x + THREE;
               }
@@ -528,7 +528,7 @@ public class Ships {
                   || checkForShip[k][y] == THREE || checkForShip[k][chONE] == THREE
                   || checkForShip[k][chTWO] == THREE || checkForShip[k][y] == FOUR
                   || checkForShip[k][chONE] == FOUR || checkForShip[k][chTWO] == FOUR) {
-                i = i - ONE;
+                numberOfShips = numberOfShips - ONE;
                 flag = ONE;
                 k = x + THREE;
               }
@@ -543,10 +543,10 @@ public class Ships {
         }
       }
     }
-    return i;
+    return numberOfShips;
   }
 
-  public int setBoat(Button[][] ship, int i, int buttle) {
+  public int setBoat(Button[][] ship, int numberOfShips, int buttle) {
     SecureRandom rand = new SecureRandom();
     int x = (rand.nextInt(SIZE - ONE));
     int y = (rand.nextInt(SIZE - ONE));
@@ -562,7 +562,7 @@ public class Ships {
           || checkForShip[x][chTHREE] == THREE || checkForShip[chONE][chTHREE] == THREE
           || checkForShip[x][y] == FOUR || checkForShip[chONE][y] == FOUR
           || checkForShip[x][chTHREE] == FOUR || checkForShip[chONE][chTHREE] == FOUR) {
-        i = i - ONE;
+        numberOfShips = numberOfShips - ONE;
       } else {
         setShipColor(ship, x, y, buttle);
         checkForShip[x][y] = ONE;
@@ -584,7 +584,7 @@ public class Ships {
             || checkForShip[chONE][chFOUR] == THREE || checkForShip[x][y] == FOUR
             || checkForShip[chONE][y] == FOUR || checkForShip[x][chTHREE] == FOUR
             || checkForShip[x][chFOUR] == FOUR || checkForShip[chONE][chTHREE] == FOUR) {
-          i = i - ONE;
+          numberOfShips = numberOfShips - ONE;
         } else {
           setShipColor(ship, x, y, buttle);
           checkForShip[x][y] = ONE;
@@ -606,7 +606,7 @@ public class Ships {
               || checkForShip[x][y] == FOUR || checkForShip[chTWO][y] == FOUR
               || checkForShip[x][chTHREE] == FOUR || checkForShip[x][chFOUR] == FOUR
               || checkForShip[chTWO][chFOUR] == FOUR || checkForShip[chTWO][chTHREE] == FOUR) {
-            i = i - ONE;
+            numberOfShips = numberOfShips - ONE;
           } else {
             setShipColor(ship, x, y, buttle);
             checkForShip[x][y] = ONE;
@@ -629,7 +629,7 @@ public class Ships {
                 || checkForShip[x][y] == FOUR || checkForShip[chONE][y] == FOUR
                 || checkForShip[chTWO][y] == FOUR || checkForShip[x][chTHREE] == FOUR
                 || checkForShip[chONE][chTHREE] == FOUR || checkForShip[chTWO][chTHREE] == FOUR) {
-              i = i - ONE;
+              numberOfShips = numberOfShips - ONE;
             } else {
               setShipColor(ship, x, y, buttle);
               checkForShip[x][y] = ONE;
@@ -652,7 +652,7 @@ public class Ships {
                   || checkForShip[x][y] == FOUR || checkForShip[chONE][y] == FOUR
                   || checkForShip[chTWO][y] == FOUR || checkForShip[x][chFOUR] == FOUR
                   || checkForShip[chTWO][chFOUR] == FOUR || checkForShip[chONE][chFOUR] == FOUR) {
-                i = i - ONE;
+                numberOfShips = numberOfShips - ONE;
               } else {
                 setShipColor(ship, x, y, buttle);
                 checkForShip[x][y] = ONE;
@@ -675,7 +675,7 @@ public class Ships {
                     || checkForShip[x][chTHREE] == FOUR || checkForShip[x][chFOUR] == FOUR
                     || checkForShip[chONE][chTHREE] == FOUR
                     || checkForShip[chONE][chFOUR] == FOUR) {
-                  i = i - ONE;
+                  numberOfShips = numberOfShips - ONE;
                 } else {
                   setShipColor(ship, x, y, buttle);
                   checkForShip[x][y] = ONE;
@@ -703,7 +703,7 @@ public class Ships {
                   || checkForShip[x][chTHREE] == FOUR || checkForShip[x][chFOUR] == FOUR
                   || checkForShip[chTWO][chFOUR] == FOUR || checkForShip[chONE][chTHREE] == FOUR
                   || checkForShip[chONE][chFOUR] == FOUR || checkForShip[chTWO][chTHREE] == FOUR) {
-                i = i - ONE;
+                numberOfShips = numberOfShips - ONE;
               } else {
                 setShipColor(ship, x, y, buttle);
                 checkForShip[x][y] = ONE;
@@ -713,7 +713,7 @@ public class Ships {
         }
       }
     }
-    return i;
+    return numberOfShips;
   }
 
   private void rememberItem() {
