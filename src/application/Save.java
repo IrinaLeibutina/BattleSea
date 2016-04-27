@@ -8,16 +8,6 @@ import java.io.IOException;
 import static application.Constants.*;
 
 public class Save {
-  public void printArray(int[][] saveInformation) {
-    for (int i = 0; i < FORTY; i++) {
-      for (int j = 0; j < SIZE; j++) {
-        System.out.print(saveInformation[i][j] + " ");
-      }
-      System.out.println();
-    }
-    System.out.println();
-  }
-
   public void saveArrayToFile(int[][] firstField, int[][] secondField, int[][] firstBattle,
       int[][] secondBattle, String path) {
     try {
