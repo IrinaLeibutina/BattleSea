@@ -1,0 +1,159 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "baa041b7_8f6213ac",
+        "filename": "src/application/Constants.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1007635
+      },
+      "writtenOn": "2016-05-01T10:44:14Z",
+      "side": 1,
+      "message": "As for me, NULL is associated with keyword null.",
+      "range": {
+        "startLine": 16,
+        "startChar": 26,
+        "endLine": 16,
+        "endChar": 30
+      },
+      "revId": "1396f2433f407aa67cb330ba680721cb7b4df406",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "baa041b7_6f590ffe",
+        "filename": "src/application/Constants.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1007635
+      },
+      "writtenOn": "2016-05-01T10:44:14Z",
+      "side": 1,
+      "message": "if you decided to define something, it should be understandable, is this about players, ships and so on, like FIRST_PLAYER, not just ONE",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 38
+      },
+      "revId": "1396f2433f407aa67cb330ba680721cb7b4df406",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "baa041b7_6f422f12",
+        "filename": "src/application/Field.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1007635
+      },
+      "writtenOn": "2016-05-01T10:44:14Z",
+      "side": 1,
+      "message": "looks strange that you create 2 fields and return one of them. \n\nand when you create you do like this:\n    firstField \u003d fieldForBattle.createFieldForBattle(ONE);\n    secondField \u003d fieldForBattle.createFieldForBattle(TWO);\n\nwhy so?\n\nyou can just create one field and write like this:\n\nif (1st type) field[i][j].setLayoutY(THIRTY * newJ);\nif (2nd type) field[i][j].setLayoutY(THIRTY * newJ + 500);\n\nI guess it is the only difference, isn\u0027t it?",
+      "revId": "1396f2433f407aa67cb330ba680721cb7b4df406",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "baa041b7_ef563fd1",
+        "filename": "src/application/Field.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1007635
+      },
+      "writtenOn": "2016-05-01T10:44:14Z",
+      "side": 1,
+      "message": "char[] name \u003d new char[11] {\u0027a\u0027, \u0027b\u0027, ..., \u0027z\u0027};",
+      "range": {
+        "startLine": 60,
+        "startChar": 2,
+        "endLine": 70,
+        "endChar": 20
+      },
+      "revId": "1396f2433f407aa67cb330ba680721cb7b4df406",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "baa041b7_0f48432c",
+        "filename": "src/application/Field.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1007635
+      },
+      "writtenOn": "2016-05-01T10:44:14Z",
+      "side": 1,
+      "message": "char[] name \u003d new char[11] {\u00271\u0027, \u00272\u0027, ..., \u0027 \u0027};",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 96,
+        "endChar": 23
+      },
+      "revId": "1396f2433f407aa67cb330ba680721cb7b4df406",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "baa041b7_cf513bda",
+        "filename": "src/application/Field.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1007635
+      },
+      "writtenOn": "2016-05-01T10:44:14Z",
+      "side": 1,
+      "message": "char[] name \u003d new char[11] {\u0027a\u0027, \u0027b\u0027, ..., \u0027z\u0027};",
+      "range": {
+        "startLine": 123,
+        "startChar": 0,
+        "endLine": 133,
+        "endChar": 20
+      },
+      "revId": "1396f2433f407aa67cb330ba680721cb7b4df406",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "baa041b7_af5f17e4",
+        "filename": "src/application/Field.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1007635
+      },
+      "writtenOn": "2016-05-01T10:44:14Z",
+      "side": 1,
+      "message": "char[] name \u003d new char[11] {\u0027a\u0027, \u0027b\u0027, ..., \u0027z\u0027};",
+      "range": {
+        "startLine": 154,
+        "startChar": 1,
+        "endLine": 165,
+        "endChar": 21
+      },
+      "revId": "1396f2433f407aa67cb330ba680721cb7b4df406",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
