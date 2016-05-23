@@ -153,13 +153,13 @@ public class BattleWithComp extends Ships {
       for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j < SIZE; j++) {
 
-          if (boat1 == NULL && battleship1 == NULL && cruiser1 == NULL && destroyer1 == NULL) {
+          if (boat1 == FLAG && battleship1 == FLAG && cruiser1 == FLAG && destroyer1 == FLAG) {
             win.setText("Комрьютер победил!!!");
             battle.getChildren().add(win);
             System.out.println("Второй ");
             return;
           }
-          if (boat2 == NULL && battleship2 == NULL && cruiser2 == NULL && destroyer2 == NULL) {
+          if (boat2 == FLAG && battleship2 == FLAG && cruiser2 == FLAG && destroyer2 == FLAG) {
             win.setText("Игрок Победил!!!");
             battle.getChildren().addAll(win);
             System.out.println("Первый");
@@ -173,7 +173,7 @@ public class BattleWithComp extends Ships {
             positionSecond++;
             newCheck = saveFirstField;
 
-            if (newCheck[x][y] != NULL) {
+            if (newCheck[x][y] != FLAG) {
               field = firstField;
               boat1 = boatCheck(field, x, y, boat1); // Boat
               destroyer1 = destroyerCheck(field, x, y, destroyer1); // Destroyer
@@ -182,11 +182,11 @@ public class BattleWithComp extends Ships {
 
             } else {
               firstField[x][y].setStyle("-fx-base: lightgrey");
-              firstField[x][y].setOpacity(NULL);
+              firstField[x][y].setOpacity(FLAG);
               newCheck[x][y] = -1;
             }
-            i = NULL;
-            j = NULL;
+            i = FLAG;
+            j = FLAG;
           }
           if (saveFirstBattle[i][j] == positionSecond) {
             int x = i;
@@ -194,7 +194,7 @@ public class BattleWithComp extends Ships {
 
             newCheck = saveSecondField;
 
-            if (newCheck[x][y] != NULL) {
+            if (newCheck[x][y] != FLAG) {
               field = secondField;
               boat2 = boatCheck(field, x, y, boat2); // Boat
               battleship2 = battleshipCheck(field, x, y, battleship2, TWO); // Destroyer
@@ -202,13 +202,13 @@ public class BattleWithComp extends Ships {
               destroyer2 = destroyerCheck(field, x, y, destroyer2); // Battleship
             } else {
               secondField[x][y].setStyle("-fx-base: lightgrey");
-              secondField[x][y].setOpacity(NULL);
+              secondField[x][y].setOpacity(FLAG);
               newCheck[x][y] = -1;
             }
             System.out.println("\nFindSecond" + positionSecond);
             positionSecond++;
-            i = NULL;
-            j = NULL;
+            i = FLAG;
+            j = FLAG;
           }
         }
       }
@@ -239,7 +239,7 @@ public class BattleWithComp extends Ships {
         // Battle
         secondField[i][j].setOnMouseClicked(event -> {
           if (first == false) {
-            if (boat1 == NULL && battleship1 == NULL && cruiser1 == NULL && destroyer1 == NULL) {
+            if (boat1 == FLAG && battleship1 == FLAG && cruiser1 == FLAG && destroyer1 == FLAG) {
               win.setText("Игрок победил!!!");
               playGame(primaryStage, win);
               return;
@@ -250,7 +250,7 @@ public class BattleWithComp extends Ships {
               second = false;
               first = false;
             } else {
-              if (newCheck[x][y] != NULL) {
+              if (newCheck[x][y] != FLAG) {
                 second = false;
                 first = false;
                 field = secondField;
@@ -261,7 +261,7 @@ public class BattleWithComp extends Ships {
                 positionFirst++;
                 saveFirstBattle[x][y] = positionFirst;
               }
-              if (newCheck[x][y] == NULL) {
+              if (newCheck[x][y] == FLAG) {
                 secondField[x][y].setStyle("-fx-base: lightgrey");
                 secondField[x][y].setOpacity(0);
                 newCheck[x][y] = -1;
@@ -276,7 +276,7 @@ public class BattleWithComp extends Ships {
           }
 
           if (second) {
-            if (boat2 == NULL && battleship2 == NULL && cruiser2 == NULL && destroyer2 == NULL) {
+            if (boat2 == FLAG && battleship2 == FLAG && cruiser2 == FLAG && destroyer2 == FLAG) {
               System.out.println("Second");
               win.setText("Компьютер победил!!!");
               playGame(primaryStage, win);
@@ -292,7 +292,7 @@ public class BattleWithComp extends Ships {
               second = true;
               first = true;
             } else {
-              if (newCheck[positionX][positionY] != NULL) {
+              if (newCheck[positionX][positionY] != FLAG) {
                 second = true;
                 first = true;
                 field = firstField;
@@ -303,7 +303,7 @@ public class BattleWithComp extends Ships {
                 positionFirst++;
                 saveSecondBattle[positionX][positionY] = positionFirst;
               }
-              if (newCheck[positionX][positionY] == NULL) {
+              if (newCheck[positionX][positionY] == FLAG) {
                 firstField[positionX][positionY].setStyle("-fpositionX-base: lightgrepositionY");
                 firstField[positionX][positionY].setOpacity(0);
                 newCheck[positionX][positionY] = -1;
@@ -323,9 +323,9 @@ public class BattleWithComp extends Ships {
 
   // System.out.println(...) use for check in console
   public int battleshipCheck(Button[][] field, int x, int y, int Battleship, int stroke) {
-    int count = NULL;
-    if (Battleship == NULL) {
-      return NULL;
+    int count = FLAG;
+    if (Battleship == FLAG) {
+      return FLAG;
     }
     if (newCheck[x][y] == FOUR && stroke == ONE) {
 
@@ -336,14 +336,14 @@ public class BattleWithComp extends Ships {
       }
       if (count < THREE) {
         for (int k = x - FOUR; k < x; k++) {
-          if (k >= NULL && newCheck[k][y] == 8) {
+          if (k >= FLAG && newCheck[k][y] == 8) {
             count++;
           }
         }
       }
       if (count < THREE) {
         for (int k = y - FOUR; k < y; k++) {
-          if (k >= NULL && newCheck[x][k] == 8) {
+          if (k >= FLAG && newCheck[x][k] == 8) {
             count++;
           }
         }
@@ -358,7 +358,7 @@ public class BattleWithComp extends Ships {
       if (count == THREE) {
         System.out.println("Четырехпалубный");
         Battleship--;
-        count = NULL;
+        count = FLAG;
       }
       newCheck[x][y] = 8;
       field[x][y].setStyle("-fx-base: blue");
@@ -374,7 +374,7 @@ public class BattleWithComp extends Ships {
       }
       if (count < THREE) {
         for (int k = x - FOUR; k < x; k++) {
-          if (k >= NULL && newCheck[k][y] == FOUR) {
+          if (k >= FLAG && newCheck[k][y] == FOUR) {
             count++;
             newCheck[k][y] = 8;
             field[k][y].setStyle("-fx-base: blue");
@@ -383,7 +383,7 @@ public class BattleWithComp extends Ships {
       }
       if (count < THREE) {
         for (int k = y - FOUR; k < y; k++) {
-          if (k >= NULL && newCheck[x][k] == FOUR) {
+          if (k >= FLAG && newCheck[x][k] == FOUR) {
             count++;
             newCheck[x][k] = 8;
             field[x][k].setStyle("-fx-base: blue");
@@ -402,7 +402,7 @@ public class BattleWithComp extends Ships {
       if (count == THREE) {
         System.out.println("Четырехпалубный"); ////
         Battleship--;
-        count = NULL;
+        count = FLAG;
       }
       newCheck[x][y] = 8;
       field[x][y].setStyle("-fx-base: blue");
@@ -412,9 +412,9 @@ public class BattleWithComp extends Ships {
   }
 
   public int cruiserCheck(Button[][] field, int x, int y, int cruiser) {
-    int count = NULL;
-    if (cruiser == NULL) {
-      return NULL;
+    int count = FLAG;
+    if (cruiser == FLAG) {
+      return FLAG;
     }
     if (newCheck[x][y] == THREE) {
       for (int k = x; k < x + THREE; k++) {
@@ -424,14 +424,14 @@ public class BattleWithComp extends Ships {
       }
       if (count < TWO) {
         for (int k = x - THREE; k < x; k++) {
-          if (k >= NULL && newCheck[k][y] == SIX) {
+          if (k >= FLAG && newCheck[k][y] == SIX) {
             count++;
           }
         }
       }
       if (count < TWO) {
         for (int k = y - THREE; k < y; k++) {
-          if (k >= NULL && newCheck[x][k] == SIX) {
+          if (k >= FLAG && newCheck[x][k] == SIX) {
             count++;
           }
         }
@@ -446,7 +446,7 @@ public class BattleWithComp extends Ships {
       if (count == TWO) {
         System.out.println("Трехпалубный"); ////
         cruiser--;
-        count = NULL;
+        count = FLAG;
       }
       newCheck[x][y] = SIX;
       field[x][y].setStyle("-fx-base: green");
@@ -455,9 +455,9 @@ public class BattleWithComp extends Ships {
   }
 
   public int destroyerCheck(Button[][] field, int x, int y, int destroyer) {
-    int count = NULL;
-    if (destroyer == NULL) {
-      return NULL;
+    int count = FLAG;
+    if (destroyer == FLAG) {
+      return FLAG;
     }
     if (newCheck[x][y] == TWO) {
       for (int k = x; k < x + TWO; k++) {
@@ -467,14 +467,14 @@ public class BattleWithComp extends Ships {
       }
       if (count < ONE) {
         for (int k = x - TWO; k < x; k++) {
-          if (k >= NULL && newCheck[k][y] == FIFE) {
+          if (k >= FLAG && newCheck[k][y] == FIFE) {
             count++;
           }
         }
       }
       if (count < ONE) {
         for (int k = y - TWO; k < y; k++) {
-          if (k >= NULL && newCheck[x][k] == FIFE) {
+          if (k >= FLAG && newCheck[x][k] == FIFE) {
             count++;
           }
         }
@@ -489,7 +489,7 @@ public class BattleWithComp extends Ships {
       if (count == ONE) {
         System.out.println("Двухпалубный"); ////
         destroyer--;
-        count = NULL;
+        count = FLAG;
       }
       newCheck[x][y] = FIFE;
       field[x][y].setStyle("-fx-base: lightgrey");
@@ -498,8 +498,8 @@ public class BattleWithComp extends Ships {
   }
 
   public int boatCheck(Button[][] field, int x, int y, int boat) {
-    if (boat == NULL) {
-      return NULL;
+    if (boat == FLAG) {
+      return FLAG;
     }
     if (newCheck[x][y] == ONE) {
       newCheck[x][y] = 9;

@@ -17,8 +17,8 @@ class ScalaReplay {
       var i = low
       var j = high
       while (i <= j) {
-        while (maxNumber(i) > pivot) i += 1
-        while (maxNumber(j) < pivot) j -= 1
+        while (maxNumber(i) < pivot) i += 1
+        while (maxNumber(j) > pivot) j -= 1
         if (i <= j) {
           swap(i, j)
           i += 1
@@ -30,5 +30,6 @@ class ScalaReplay {
     }
     quickSort(0, maxNumber.length - 1)
   }
+
 }
 

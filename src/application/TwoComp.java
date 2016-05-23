@@ -14,6 +14,8 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import static application.Constants.*;
+
+import java.io.File;
 import java.security.SecureRandom;
 
 public class TwoComp extends Ships {
@@ -25,6 +27,8 @@ public class TwoComp extends Ships {
   Button[][] secondField = fieldForBattle.createFieldForBattle(TWO);
   Button[][] field = new Button[SIZE][SIZE];
   Interface inter;
+
+  public String str = "d:\\Save.txt";
 
   TwoComp() {
     for (int i = 0; i < SIZE; i++) {
@@ -147,6 +151,7 @@ public class TwoComp extends Ships {
     }
 
     playGame.setOnMouseClicked(event -> {
+
       MyThread thread = new MyThread();
       try {
         thread.start();
@@ -156,13 +161,13 @@ public class TwoComp extends Ships {
     });
 
     getWinner.setOnMouseClicked(event2 -> {
-      if (boat1 == NULL && battleship1 == NULL && cruiser1 == NULL && destroyer1 == NULL) {
+      if (boat1 == FLAG && battleship1 == FLAG && cruiser1 == FLAG && destroyer1 == FLAG) {
         win.setText("Второй Игрок Победил!!!");
         battle.getChildren().add(win);
         System.out.println("Второй ");
         return;
       }
-      if (boat2 == NULL && battleship2 == NULL && cruiser2 == NULL && destroyer2 == NULL) {
+      if (boat2 == FLAG && battleship2 == FLAG && cruiser2 == FLAG && destroyer2 == FLAG) {
         win.setText("Первый Игрок Победил!!!");
         battle.getChildren().addAll(win);
         System.out.println("Первый");
@@ -248,6 +253,17 @@ public class TwoComp extends Ships {
     replay.setLayoutY(568);
     battle.getChildren().addAll(replay, repeat);
 
+    AllGames all = new AllGames();
+
+
+    String path = all.getPath();
+    System.out.println("PATH" + path);
+
+    if (path == "1") {
+    } else {
+      str = path;
+    }
+
     repeat.setOnMouseClicked(event -> {
       ThreadForReplay thread = new ThreadForReplay();
       try {
@@ -260,9 +276,9 @@ public class TwoComp extends Ships {
 
   // System.out.println(...) use for check in console
   public int battleshipCheck(Button[][] field, int x, int y, int Battleship, int stroke) {
-    int count = NULL;
-    if (Battleship == NULL) {
-      return NULL;
+    int count = FLAG;
+    if (Battleship == FLAG) {
+      return FLAG;
     }
     if (newCheck[x][y] == FOUR && stroke == ONE) {
 
@@ -273,14 +289,14 @@ public class TwoComp extends Ships {
       }
       if (count < THREE) {
         for (int k = x - FOUR; k < x; k++) {
-          if (k >= NULL && newCheck[k][y] == 8) {
+          if (k >= FLAG && newCheck[k][y] == 8) {
             count++;
           }
         }
       }
       if (count < THREE) {
         for (int k = y - FOUR; k < y; k++) {
-          if (k >= NULL && newCheck[x][k] == 8) {
+          if (k >= FLAG && newCheck[x][k] == 8) {
             count++;
           }
         }
@@ -295,7 +311,7 @@ public class TwoComp extends Ships {
       if (count == THREE) {
         System.out.println("Четырехпалубный");
         Battleship--;
-        count = NULL;
+        count = FLAG;
       }
       newCheck[x][y] = 8;
       field[x][y].setStyle("-fx-base: blue");
@@ -304,9 +320,9 @@ public class TwoComp extends Ships {
   }
 
   public int cruiserCheck(Button[][] field, int x, int y, int cruiser) {
-    int count = NULL;
-    if (cruiser == NULL) {
-      return NULL;
+    int count = FLAG;
+    if (cruiser == FLAG) {
+      return FLAG;
     }
     if (newCheck[x][y] == THREE) {
       for (int k = x; k < x + THREE; k++) {
@@ -316,14 +332,14 @@ public class TwoComp extends Ships {
       }
       if (count < TWO) {
         for (int k = x - THREE; k < x; k++) {
-          if (k >= NULL && newCheck[k][y] == SIX) {
+          if (k >= FLAG && newCheck[k][y] == SIX) {
             count++;
           }
         }
       }
       if (count < TWO) {
         for (int k = y - THREE; k < y; k++) {
-          if (k >= NULL && newCheck[x][k] == SIX) {
+          if (k >= FLAG && newCheck[x][k] == SIX) {
             count++;
           }
         }
@@ -338,7 +354,7 @@ public class TwoComp extends Ships {
       if (count == TWO) {
         System.out.println("Трехпалубный"); ////
         cruiser--;
-        count = NULL;
+        count = FLAG;
       }
       newCheck[x][y] = SIX;
       field[x][y].setStyle("-fx-base: green");
@@ -347,9 +363,9 @@ public class TwoComp extends Ships {
   }
 
   public int destroyerCheck(Button[][] field, int x, int y, int destroyer) {
-    int count = NULL;
-    if (destroyer == NULL) {
-      return NULL;
+    int count = FLAG;
+    if (destroyer == FLAG) {
+      return FLAG;
     }
     if (newCheck[x][y] == TWO) {
       for (int k = x; k < x + TWO; k++) {
@@ -359,14 +375,14 @@ public class TwoComp extends Ships {
       }
       if (count < ONE) {
         for (int k = x - TWO; k < x; k++) {
-          if (k >= NULL && newCheck[k][y] == FIFE) {
+          if (k >= FLAG && newCheck[k][y] == FIFE) {
             count++;
           }
         }
       }
       if (count < ONE) {
         for (int k = y - TWO; k < y; k++) {
-          if (k >= NULL && newCheck[x][k] == FIFE) {
+          if (k >= FLAG && newCheck[x][k] == FIFE) {
             count++;
           }
         }
@@ -381,7 +397,7 @@ public class TwoComp extends Ships {
       if (count == ONE) {
         System.out.println("Двухпалубный"); ////
         destroyer--;
-        count = NULL;
+        count = FLAG;
       }
       newCheck[x][y] = FIFE;
       field[x][y].setStyle("-fx-base: lightgrey");
@@ -390,8 +406,8 @@ public class TwoComp extends Ships {
   }
 
   public int boatCheck(Button[][] field, int x, int y, int boat) {
-    if (boat == NULL) {
-      return NULL;
+    if (boat == FLAG) {
+      return FLAG;
     }
     if (newCheck[x][y] == ONE) {
       newCheck[x][y] = 9;
@@ -404,8 +420,19 @@ public class TwoComp extends Ships {
 
   class MyThread extends Thread {
     public void run() {
+      /*
+       * Save save = new Save(); for (int number = 523; number <= 2100; number++) { String path =
+       * "d:\\Rеplay" + number + ".txt"; checkForShipFirst = save.loadArrayFromFile(path, ONE);
+       * checkForShipSecond = save.loadArrayFromFile(path, TWO); saveSecondBattle =
+       * save.loadArrayFromFile(path, FOUR); saveFirstBattle = save.loadArrayFromFile(path, THREE);
+       * 
+       * path = "d:\\Rеplay" + (number+9124) + ".txt"; save.saveArrayToFile(saveFirstField,
+       * saveSecondField, saveFirstBattle, saveSecondBattle, path); // path = "d:\\Rеplay" +
+       * (number*2+1) + ".txt"; // save.saveArrayToFile(saveFirstField, saveSecondField,
+       * saveFirstBattle, saveSecondBattle, /// path); }
+       */
       // Update
-      positionFirst = NULL;
+      positionFirst = FLAG;
       first = false;
       second = false;
       boat1 = FOUR;
@@ -417,31 +444,65 @@ public class TwoComp extends Ships {
       cruiser2 = TWO;
       battleship2 = ONE;
 
+
+
       Text win = new Text();
       win.setLayoutX(350);
       win.setLayoutY(250);
       win.setFont(Font.font("Arial", FontPosture.ITALIC, 32));
       win.setFill(Color.DARKSALMON);
 
+      // Time
+      long start = System.nanoTime();
       Save save = new Save();
-      for (int i = 0; i < 50; i++) {
-        for (int j = 0; j < 50; j++) {
+
+
+      String path1 = "d:\\Save.txt";
+      for (int i = 0; i < 40; i++) {
+        for (int j = 0; j < 40; j++) {
           SecureRandom rand = new SecureRandom();
 
-          if (boat2 == NULL && battleship2 == NULL && cruiser2 == NULL && destroyer2 == NULL) {
-            System.out.println("First");
-            win.setText("Первый компьютер победил!!!");
+          if (boat2 == FLAG && battleship2 == FLAG && cruiser2 == FLAG && destroyer2 == FLAG
+              || boat1 == FLAG && battleship1 == FLAG && cruiser1 == FLAG && destroyer1 == FLAG) {
             save.saveArrayToFile(saveFirstField, saveSecondField, saveFirstBattle, saveSecondBattle,
-                "d:\\Rеplay.txt");
-            i = 100;
-            j = 100;
+                path1);
+                // positionFirst = FLAG;
+                // first = false;
+                // second = false;
+                /*
+                 * boat1 = FOUR; destroyer1 = THREE; cruiser1 = TWO; battleship1 = ONE; boat2 =
+                 * FOUR; destroyer2 = THREE; cruiser2 = TWO; battleship2 = ONE;
+                 */
+
+            // checkForShipFirst = save.loadArrayFromFile("d:\\Rеplay.txt", ONE);
+            // checkForShipSecond = save.loadArrayFromFile("d:\\Rеplay.txt", TWO);
+
+            // checkForShipFirst = saveFirstField;
+            // checkForShipSecond = saveSecondField;
+            i = 50;
+            j = 50;
             break;
           }
-          if (boat1 == NULL && battleship1 == NULL && cruiser1 == NULL && destroyer1 == NULL) {
+
+
+          if (boat2 == FLAG && battleship2 == FLAG && cruiser2 == FLAG && destroyer2 == FLAG) {
+            System.out.println("First");
+            win.setText("Первый компьютер победил!!!");
+
+            i = 100;
+            j = 100;
+
+            //
+
+
+            break;
+          }
+          if (boat1 == FLAG && battleship1 == FLAG && cruiser1 == FLAG && destroyer1 == FLAG) {
             System.out.println("Second");
             win.setText("Второй компьютер победил!!!");
-            save.saveArrayToFile(saveFirstField, saveSecondField, saveFirstBattle, saveSecondBattle,
-                "d:\\Replay.txt");
+            // save.saveArrayToFile(saveFirstField, saveSecondField, saveFirstBattle,
+            // saveSecondBattle,
+            // "d:\\Replay.txt");
             i = 100;
             j = 100;
             break;
@@ -456,7 +517,7 @@ public class TwoComp extends Ships {
               second = false;
               first = false;
             } else {
-              if (newCheck[x][y] != NULL) {
+              if (newCheck[x][y] != FLAG) {
                 second = false;
                 first = false;
                 field = firstField;
@@ -467,7 +528,7 @@ public class TwoComp extends Ships {
                 positionFirst++;
                 saveFirstBattle[x][y] = positionFirst;
               } else {
-                if (newCheck[x][y] == NULL) {
+                if (newCheck[x][y] == FLAG) {
                   firstField[x][y].setStyle("-fx-base: lightgrey");
                   firstField[x][y].setOpacity(0);
                   newCheck[x][y] = -1;
@@ -495,7 +556,7 @@ public class TwoComp extends Ships {
               second = true;
               first = true;
             } else {
-              if (newCheck[positionX][positionY] != NULL) {
+              if (newCheck[positionX][positionY] != FLAG) {
                 second = true;
                 first = true;
                 field = secondField;
@@ -506,8 +567,8 @@ public class TwoComp extends Ships {
                 positionFirst++;
                 saveSecondBattle[positionX][positionY] = positionFirst;
               } else {
-                if (newCheck[positionX][positionY] == NULL) {
-                  secondField[positionX][positionY].setStyle("-fx-base: lightgrey");
+                if (newCheck[positionX][positionY] == FLAG) {
+                  // secondField[positionX][positionY].setStyle("-fx-base: lightgrey");
                   secondField[positionX][positionY].setOpacity(0);
                   newCheck[positionX][positionY] = -1;
                   second = false;
@@ -524,36 +585,25 @@ public class TwoComp extends Ships {
           }
         }
       }
-      // For Check in console
-      for (int i = 0; i < SIZE; i++) {
-        System.out.println(" ");
-        for (int j = 0; j < SIZE; j++) {
-          System.out.print(saveFirstBattle[i][j] + " ");
-        }
-      }
 
-      for (int i = 0; i < SIZE; i++) {
-        System.out.println(" ");
-        for (int j = 0; j < SIZE; j++) {
-          System.out.print(saveSecondBattle[i][j] + " ");
-        }
-      }
-      for (int i = 0; i < 10; i++) {
-        for (int j = 0; j < 10; j++) {
-          if (saveFirstBattle[0][0] == positionSecond || saveSecondBattle[0][0] == positionSecond) {
-            System.out.println(positionSecond);
-            positionSecond++;
-          } else {
-            if (saveFirstBattle[i][j] == positionSecond
-                || saveSecondBattle[i][j] == positionSecond) {
-              System.out.println(positionSecond);
-              positionSecond++;
-              i = 0;
-              j = 0;
-            }
-          }
-        }
-      }
+      long end = System.nanoTime();
+      long traceTime = end - start;
+
+      System.out.println(traceTime);
+
+
+      // For Check in console
+      /*
+       * for (int i = 0; i < SIZE; i++) { System.out.println(" "); for (int j = 0; j < SIZE; j++) {
+       * System.out.print(saveFirstBattle[i][j] + " "); } }
+       * 
+       * for (int i = 0; i < SIZE; i++) { System.out.println(" "); for (int j = 0; j < SIZE; j++) {
+       * System.out.print(saveSecondBattle[i][j] + " "); } } for (int i = 0; i < 10; i++) { for (int
+       * j = 0; j < 10; j++) { if (saveFirstBattle[0][0] == positionSecond || saveSecondBattle[0][0]
+       * == positionSecond) { System.out.println(positionSecond); positionSecond++; } else { if
+       * (saveFirstBattle[i][j] == positionSecond || saveSecondBattle[i][j] == positionSecond) {
+       * System.out.println(positionSecond); positionSecond++; i = 0; j = 0; } } } } }
+       */
     }
   }
 
@@ -561,11 +611,21 @@ public class TwoComp extends Ships {
   class ThreadForReplay extends Thread {
     public void run() {
       // Get data from file
+
+      File f = new File("d:\\Replay\\Rеplay2.txt");
+      long len = f.length();
+
+      System.out.println("SIZE" + len);
       Save save = new Save();
-      saveFirstBattle = save.loadArrayFromFile("d:\\Rеplay.txt", THREE);
-      saveSecondBattle = save.loadArrayFromFile("d:\\Rеplay.txt", FOUR);
-      saveFirstField = save.loadArrayFromFile("d:\\Rеplay.txt", ONE);
-      saveSecondField = save.loadArrayFromFile("d:\\Rеplay.txt", TWO);
+      long start = System.nanoTime();
+      saveFirstBattle = save.loadArrayFromFile(str, THREE);
+      long end = System.nanoTime();
+      long traceTime = end - start;
+
+      System.out.println(traceTime);
+      saveSecondBattle = save.loadArrayFromFile(str, FOUR);
+      saveFirstField = save.loadArrayFromFile(str, ONE);
+      saveSecondField = save.loadArrayFromFile(str, TWO);
       // Check in console
       for (int i = 0; i < SIZE; i++) {
         System.out.println(" ");
@@ -589,14 +649,14 @@ public class TwoComp extends Ships {
       destroyer2 = THREE;
       cruiser2 = TWO;
       battleship2 = ONE;
-      for (int i = NULL; i < SIZE; i++) {
-        for (int j = NULL; j < SIZE; j++) {
+      for (int i = FLAG; i < SIZE; i++) {
+        for (int j = FLAG; j < SIZE; j++) {
 
-          if (boat1 == NULL && battleship1 == NULL && cruiser1 == NULL && destroyer1 == NULL) {
+          if (boat1 == FLAG && battleship1 == FLAG && cruiser1 == FLAG && destroyer1 == FLAG) {
             System.out.println("Второй ");
             return;
           }
-          if (boat2 == NULL && battleship2 == NULL && cruiser2 == NULL && destroyer2 == NULL) {
+          if (boat2 == FLAG && battleship2 == FLAG && cruiser2 == FLAG && destroyer2 == FLAG) {
             System.out.println("Первый");
             return;
           }
@@ -608,7 +668,7 @@ public class TwoComp extends Ships {
             positionSecond++;
             newCheck = saveFirstField;
 
-            if (newCheck[x][y] != NULL) {
+            if (newCheck[x][y] != FLAG) {
               field = firstField;
               boat1 = boatCheck(field, x, y, boat1); // Boat
               destroyer1 = destroyerCheck(field, x, y, destroyer1); // Destroyer
@@ -616,11 +676,11 @@ public class TwoComp extends Ships {
               battleship1 = battleshipCheck(field, x, y, battleship1, 1); // Battleship
             } else {
               firstField[x][y].setStyle("-fx-base: lightgrey");
-              firstField[x][y].setOpacity(NULL);
+              firstField[x][y].setOpacity(FLAG);
               newCheck[x][y] = -1;
             }
-            i = NULL;
-            j = NULL;
+            i = FLAG;
+            j = FLAG;
             try {
               Thread.sleep(100);
             } catch (InterruptedException e) {
@@ -632,7 +692,7 @@ public class TwoComp extends Ships {
             int x = i;
             int y = j;
             newCheck = saveSecondField;
-            if (newCheck[x][y] != NULL) {
+            if (newCheck[x][y] != FLAG) {
               field = secondField;
               boat2 = boatCheck(field, x, y, boat2); // Boat
               battleship2 = battleshipCheck(field, x, y, battleship2, 1); // Destroyer
@@ -640,19 +700,18 @@ public class TwoComp extends Ships {
               destroyer2 = destroyerCheck(field, x, y, destroyer2); // Battleship
             } else {
               secondField[x][y].setStyle("-fx-base: lightgrey");
-              secondField[x][y].setOpacity(NULL);
+              secondField[x][y].setOpacity(FLAG);
               newCheck[x][y] = -1;
             }
             System.out.println("\nFindSecond" + positionSecond);
             positionSecond++;
-            i = NULL;
-            j = NULL;
-            try {
-              Thread.sleep(100);
-            } catch (InterruptedException e) {
-            }
+            i = FLAG;
+            j = FLAG;
+            // try {
+            // Thread.sleep(100);
+            // } catch (InterruptedException e) {
+            // }
           }
-
         }
       }
     }

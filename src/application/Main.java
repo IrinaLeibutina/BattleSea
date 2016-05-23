@@ -32,9 +32,10 @@ public class Main extends Application {
 
     // Create button for menu
     MenuItem newGame = new MenuItem("ÍÎÂÀß ÈÃÐÀ");
+    MenuItem allGames = new MenuItem("ÂÑÅ ÈÃÐÛ");
     MenuItem rule = new MenuItem("ÏÐÀÂÈËÀ ÈÃÐÛ");
     MenuItem exitGame = new MenuItem("ÂÛÕÎÄ");
-    SubMenu mainMenu = new SubMenu(newGame, rule, exitGame);
+    SubMenu mainMenu = new SubMenu(newGame, allGames, rule, exitGame);
 
     MenuItem players = new MenuItem("2 ÈÃÐÎÊÀ");
     MenuItem computer = new MenuItem("ÈÍÒÅËËÅÊÒ");
@@ -47,9 +48,15 @@ public class Main extends Application {
     MenuItem backMenu = new MenuItem("ÍÀÇÀÄ");
     SubMenu levelMenu = new SubMenu(levelEasy, levelHard, backMenu);
 
+    MenuItem sortForAllGames = new MenuItem("ÑÎÐÒÈÐÎÂÊÀ");
+    MenuItem mapForAllGames = new MenuItem("ÊÀÐÒÀ ÈÃÐÛ");
+    MenuItem sequence = new MenuItem("ÏÎÑËÅÄÎÂÀÒÅËÜÍÎÑÒÈ");
+    SubMenu allGamesMenu = new SubMenu(sortForAllGames, mapForAllGames, sequence, backMenu);
+
     MenuBox menuBox = new MenuBox(mainMenu);
     newGame.setOnMouseClicked(event -> menuBox.setSubMenu(newGameMenu));
     computer.setOnMouseClicked(event -> menuBox.setSubMenu(levelMenu));
+    allGames.setOnMouseClicked(event -> menuBox.setSubMenu(allGamesMenu));
     exitGame.setOnMouseClicked(event -> System.exit(0));
 
     back.setOnMouseClicked(event -> menuBox.setSubMenu(mainMenu));
@@ -75,6 +82,22 @@ public class Main extends Application {
     primaryStage.getIcons().add(animation);
     primaryStage.setScene(scene);
 
+    // All Games
+    sortForAllGames.setOnMouseClicked(event -> {
+      AllGames games = new AllGames();
+      games.workWithReplays(primaryStage);
+    });
+
+    mapForAllGames.setOnMouseClicked(event -> {
+      GameCard card = new GameCard();
+      card.workWithReplays(primaryStage);
+    });
+
+    sequence.setOnMouseClicked(event -> {
+      Sequence games = new Sequence();
+      games.workWithReplays(primaryStage);
+    });
+
     // Rule of game
     rule.setOnMouseClicked(event -> {
       createRule(primaryStage, scene);
@@ -82,7 +105,7 @@ public class Main extends Application {
     // Player game
     players.setOnMouseClicked(event -> {
       Ships ship = new Ships();
-      ship.arrangeShips(primaryStage, NULL);
+      ship.arrangeShips(primaryStage, 0);
     });
     // Computer game
     levelEasy.setOnMouseClicked(event -> {
@@ -170,7 +193,7 @@ public class Main extends Application {
 
   private static class MenuItem extends StackPane {
     public MenuItem(String name) {
-      Rectangle choice = new Rectangle(200, 25, Color.DARKSALMON);
+      Rectangle choice = new Rectangle(206, 25, Color.DARKSALMON);
       choice.setOpacity(TRANSPARENCY);
 
       Text text = new Text(name);

@@ -46,14 +46,14 @@ public class Save {
   }
 
   public int[][] loadArrayFromFile(String path, int key) {
-    int[][] read = new int[FORTY][FORTY];
+    int[][] read = new int[FORTY_POSITION][FORTY_POSITION];
     int[][] firstField = new int[SIZE][SIZE];
     int[][] secondField = new int[SIZE][SIZE];
     int[][] firstBattle = new int[SIZE][SIZE];
     int[][] secondBattle = new int[SIZE][SIZE];
 
     try (BufferedReader bufReader = new BufferedReader(new FileReader(path))) {
-      for (int i = 0; i < FORTY; i++) {
+      for (int i = 0; i < FORTY_POSITION; i++) {
         String[] strArr = bufReader.readLine().trim().split(" ");
         for (int j = 0; j < SIZE; j++) {
           read[i][j] = Integer.parseInt(strArr[j]);

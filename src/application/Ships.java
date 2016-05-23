@@ -75,7 +75,7 @@ public class Ships {
     }
 
     choice.setOnMouseClicked(event -> {
-      if (buttle == NULL) {
+      if (buttle == FLAG) {
         if (nextPlayer == TWO) {
           rememberItem();
           Battle battle = new Battle();
@@ -83,7 +83,7 @@ public class Ships {
         }
         if (nextPlayer == ONE) {
           rememberItem();
-          arrangeShips(primaryStage, NULL);
+          arrangeShips(primaryStage, FLAG);
           nextPlayer = TWO;
         }
       }
@@ -122,15 +122,15 @@ public class Ships {
   public void firstButton(MenuItem battleship, Button[][] ship, int buttle) {
     battleship.setOnMouseClicked(event -> {
       // Delete ship
-      for (int i = NULL; i < SIZE; i++) {
-        for (int j = NULL; j < SIZE; j++) {
+      for (int i = FLAG; i < SIZE; i++) {
+        for (int j = FLAG; j < SIZE; j++) {
           if (checkForShip[i][j] == FOUR) {
-            checkForShip[i][j] = NULL;
+            checkForShip[i][j] = FLAG;
             ship[i][j].setStyle("-fx-base: lightgreen");
           }
         }
       }
-      for (int i = NULL; i < BATTLESHIP; i++) {
+      for (int i = FLAG; i < BATTLESHIP; i++) {
         i = setBattleship(ship, i, buttle);
       }
     });
@@ -138,15 +138,15 @@ public class Ships {
 
   public void secondButton(MenuItem cruiser, Button[][] ship, int buttle) {
     cruiser.setOnMouseClicked(event -> {
-      for (int i = NULL; i < SIZE; i++) {
-        for (int j = NULL; j < SIZE; j++) {
+      for (int i = FLAG; i < SIZE; i++) {
+        for (int j = FLAG; j < SIZE; j++) {
           if (checkForShip[i][j] == THREE) {
-            checkForShip[i][j] = NULL;
+            checkForShip[i][j] = FLAG;
             ship[i][j].setStyle("-fx-base: lightgreen");
           }
         }
       }
-      for (int i = NULL; i < CRUISER; i++) {
+      for (int i = FLAG; i < CRUISER; i++) {
         i = setCruiser(ship, i, buttle);
       }
     });
@@ -154,15 +154,15 @@ public class Ships {
 
   public void thirdButton(MenuItem destroyer, Button[][] ship, int buttle) {
     destroyer.setOnMouseClicked(event -> {
-      for (int i = NULL; i < SIZE; i++) {
-        for (int j = NULL; j < SIZE; j++) {
+      for (int i = FLAG; i < SIZE; i++) {
+        for (int j = FLAG; j < SIZE; j++) {
           if (checkForShip[i][j] == TWO) {
-            checkForShip[i][j] = NULL;
+            checkForShip[i][j] = FLAG;
             ship[i][j].setStyle("-fx-base: lightgreen");
           }
         }
       }
-      for (int i = NULL; i < DESTROYER; i++) {
+      for (int i = FLAG; i < DESTROYER; i++) {
         i = setDestroyer(ship, i, buttle);
       }
     });
@@ -170,10 +170,10 @@ public class Ships {
 
   public void forthButton(MenuItem boat, Button[][] ship, int buttle) {
     boat.setOnMouseClicked(event -> {
-      for (int i = NULL; i < SIZE; i++) {
-        for (int j = NULL; j < SIZE; j++) {
+      for (int i = FLAG; i < SIZE; i++) {
+        for (int j = FLAG; j < SIZE; j++) {
           if (checkForShip[i][j] == ONE) {
-            checkForShip[i][j] = NULL;
+            checkForShip[i][j] = FLAG;
             ship[i][j].setStyle("-fx-base: lightgreen");
           }
         }
@@ -186,19 +186,19 @@ public class Ships {
 
   public void fifthButton(Button[][] ship, int buttle) {
 
-    for (int i = NULL; i < SIZE; i++) {
-      for (int j = NULL; j < SIZE; j++) {
-        checkForShip[i][j] = NULL;
+    for (int i = FLAG; i < SIZE; i++) {
+      for (int j = FLAG; j < SIZE; j++) {
+        checkForShip[i][j] = FLAG;
         ship[i][j].setStyle("-fx-base: lightgreen");
       }
     }
-    for (int numberOfShips = NULL; numberOfShips < BATTLESHIP; numberOfShips++) {
+    for (int numberOfShips = FLAG; numberOfShips < BATTLESHIP; numberOfShips++) {
       numberOfShips = setBattleship(ship, numberOfShips, buttle);
     }
-    for (int numberOfShips = NULL; numberOfShips < CRUISER; numberOfShips++) {
+    for (int numberOfShips = FLAG; numberOfShips < CRUISER; numberOfShips++) {
       numberOfShips = setCruiser(ship, numberOfShips, buttle);
     }
-    for (int numberOfShips = NULL; numberOfShips < DESTROYER; numberOfShips++) {
+    for (int numberOfShips = FLAG; numberOfShips < DESTROYER; numberOfShips++) {
       numberOfShips = setDestroyer(ship, numberOfShips, buttle);
     }
     for (int numberOfShips = ONE; numberOfShips < BOAT + ONE; numberOfShips++) {
@@ -217,7 +217,7 @@ public class Ships {
     int x = (rand.nextInt(SIZE - ONE)); // Coordinates
     int y = (rand.nextInt(SIZE - ONE)); // Coordinates
     // Vertical ship
-    if (choice == NULL) {
+    if (choice == FLAG) {
 
       if (y + FOUR > SIZE) {
         numberOfShips = numberOfShips - ONE;
@@ -245,12 +245,12 @@ public class Ships {
     int x = (rand.nextInt(SIZE));
     int y = (ONE + rand.nextInt(6));
     // vertical
-    if (choice == NULL) {
+    if (choice == FLAG) {
       if (y + THREE > SIZE) {
         numberOfShips = numberOfShips - ONE;
       } else {
-        int flag = NULL;
-        if (x == NULL) {
+        int flag = FLAG;
+        if (x == FLAG) {
           for (int k = y - ONE; k < y + FOUR; k++) {
             int chONE = x + ONE;
 
@@ -263,7 +263,7 @@ public class Ships {
               k = y + FOUR;
             }
           }
-          if (flag == NULL) {
+          if (flag == FLAG) {
             for (int k = y; k < y + THREE; k++) {
               setShipColor(ship, x, k, buttle);
               checkForShip[x][k] = THREE;
@@ -283,7 +283,7 @@ public class Ships {
                 k = y + FOUR;
               }
             }
-            if (flag == NULL) {
+            if (flag == FLAG) {
               for (int k = y; k < y + THREE; k++) {
                 setShipColor(ship, x, k, buttle);
                 checkForShip[x][k] = THREE;
@@ -306,7 +306,7 @@ public class Ships {
                 k = y + FOUR;
               }
             }
-            if (flag == NULL) {
+            if (flag == FLAG) {
               for (int k = y; k < y + THREE; k++) {
                 setShipColor(ship, x, k, buttle);
                 checkForShip[x][k] = THREE;
@@ -323,8 +323,8 @@ public class Ships {
       if (x + THREE > SIZE) {
         numberOfShips = numberOfShips - ONE;
       } else {
-        int flag = NULL;
-        if (y == NULL) {
+        int flag = FLAG;
+        if (y == FLAG) {
           for (int k = x - ONE; k < x + FOUR; k++) {
             int chONE = y + ONE;
 
@@ -337,7 +337,7 @@ public class Ships {
               k = x + FOUR;
             }
           }
-          if (flag == NULL) {
+          if (flag == FLAG) {
             for (int k = x; k < x + THREE; k++) {
               setShipColor(ship, k, y, buttle);
               checkForShip[k][y] = THREE;
@@ -357,7 +357,7 @@ public class Ships {
                 k = x + FOUR;
               }
             }
-            if (flag == NULL) {
+            if (flag == FLAG) {
               for (int k = x; k < x + THREE; k++) {
                 setShipColor(ship, k, y, buttle);
                 checkForShip[k][y] = THREE;
@@ -380,7 +380,7 @@ public class Ships {
               }
             }
 
-            if (flag == NULL) {
+            if (flag == FLAG) {
               for (int k = x; k < x + THREE; k++) {
                 setShipColor(ship, k, y, buttle);
                 checkForShip[k][y] = THREE;
@@ -396,15 +396,15 @@ public class Ships {
   public int setDestroyer(Button[][] ship, int numberOfShips, int buttle) {
     SecureRandom rand = new SecureRandom();
     int choice = (rand.nextInt(TWO));
-    int x = (rand.nextInt(SIZE));
-    int y = (ONE + rand.nextInt(7));
+    int x = (rand.nextInt(9));
+    int y = (ONE + rand.nextInt(6));
 
-    if (choice == NULL) {
+    if (choice == FLAG) {
       if (y + TWO > SIZE) {
         numberOfShips = numberOfShips - ONE;
       } else {
-        int flag = NULL;
-        if (x == NULL) {
+        int flag = FLAG;
+        if (x == FLAG) {
 
           for (int k = y - ONE; k < y + THREE; k++) {
             int chONE = x + ONE;
@@ -418,7 +418,7 @@ public class Ships {
               k = y + THREE;
             }
           }
-          if (flag == NULL) {
+          if (flag == FLAG) {
             for (int k = y; k < y + TWO; k++) {
               setShipColor(ship, x, k, buttle);
               checkForShip[x][k] = TWO;
@@ -438,7 +438,7 @@ public class Ships {
                 k = y + THREE;
               }
             }
-            if (flag == NULL) {
+            if (flag == FLAG) {
               for (int k = y; k < y + TWO; k++) {
                 setShipColor(ship, x, k, buttle);
                 checkForShip[x][k] = TWO;
@@ -460,7 +460,7 @@ public class Ships {
                 k = y + THREE;
               }
             }
-            if (flag == NULL) {
+            if (flag == FLAG) {
               for (int k = y; k < y + TWO; k++) {
                 setShipColor(ship, x, k, buttle);
                 checkForShip[x][k] = TWO;
@@ -477,8 +477,8 @@ public class Ships {
       if (x + TWO > SIZE) {
         numberOfShips = numberOfShips - ONE;
       } else {
-        int flag = NULL;
-        if (y == NULL) {
+        int flag = FLAG;
+        if (y == FLAG) {
           for (int k = x - ONE; k < x + THREE; k++) {
             int chONE = y + ONE;
 
@@ -491,7 +491,7 @@ public class Ships {
               k = x + THREE;
             }
           }
-          if (flag == NULL) {
+          if (flag == FLAG) {
             for (int k = x; k < x + TWO; k++) {
               setShipColor(ship, k, y, buttle);
               checkForShip[k][y] = TWO;
@@ -511,7 +511,7 @@ public class Ships {
                 k = x + THREE;
               }
             }
-            if (flag == NULL) {
+            if (flag == FLAG) {
               for (int k = x; k < x + TWO; k++) {
                 setShipColor(ship, k, y, buttle);
                 checkForShip[k][y] = TWO;
@@ -533,7 +533,7 @@ public class Ships {
                 k = x + THREE;
               }
             }
-            if (flag == NULL) {
+            if (flag == FLAG) {
               for (int k = x; k < x + TWO; k++) {
                 setShipColor(ship, k, y, buttle);
                 checkForShip[k][y] = TWO;
@@ -551,7 +551,7 @@ public class Ships {
     int x = (rand.nextInt(SIZE - ONE));
     int y = (rand.nextInt(SIZE - ONE));
 
-    if (x == NULL && y == NULL) {
+    if (x == FLAG && y == FLAG) {
       int chONE = x + ONE;
       int chTHREE = y + ONE;
       if (checkForShip[x][y] == ONE || checkForShip[chONE][y] == ONE
@@ -568,7 +568,7 @@ public class Ships {
         checkForShip[x][y] = ONE;
       }
     } else {
-      if (x == NULL) {
+      if (x == FLAG) {
         int chONE = x + ONE;
         int chTHREE = y + ONE;
         int chFOUR = y - ONE;
@@ -612,7 +612,7 @@ public class Ships {
             checkForShip[x][y] = ONE;
           }
         } else {
-          if (y == NULL) {
+          if (y == FLAG) {
             int chONE = x + ONE;
             int chTWO = x - ONE;
             int chTHREE = y + ONE;
@@ -658,7 +658,7 @@ public class Ships {
                 checkForShip[x][y] = ONE;
               }
             } else {
-              if (x == NULL) {
+              if (x == FLAG) {
                 int chONE = x + ONE;
                 int chTHREE = y + ONE;
                 int chFOUR = y - ONE;
@@ -717,8 +717,8 @@ public class Ships {
   }
 
   private void rememberItem() {
-    for (int i = NULL; i < SIZE; i++) {
-      for (int j = NULL; j < SIZE; j++) {
+    for (int i = FLAG; i < SIZE; i++) {
+      for (int j = FLAG; j < SIZE; j++) {
         if (nextPlayer == ONE) {
           checkForShipFirst[i][j] = checkForShip[i][j];
         }
@@ -730,7 +730,7 @@ public class Ships {
   }
 
   public void setShipColor(Button[][] ship, int x, int y, int buttle) {
-    if (buttle == NULL || buttle == TWO || buttle == FIFE) {
+    if (buttle == FLAG || buttle == TWO || buttle == FIFE) {
       ship[x][y].setStyle("-fx-base: lightblue");
     }
     if (buttle == ONE || buttle == SIX) {

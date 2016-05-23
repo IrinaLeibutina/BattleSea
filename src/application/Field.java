@@ -13,9 +13,9 @@ public class Field {
         double newJ = j + 1.8;
         ship[i][j] = new Button();
         ship[i][j].setStyle("-fx-base: lightgreen");
-        ship[i][j].setMinSize(FORTY, FORTY);
-        ship[i][j].setLayoutX(FORTY * newI);
-        ship[i][j].setLayoutY(FORTY * newJ);
+        ship[i][j].setMinSize(FORTY_POSITION, FORTY_POSITION);
+        ship[i][j].setLayoutX(FORTY_POSITION * newI);
+        ship[i][j].setLayoutY(FORTY_POSITION * newJ);
       }
     }
     return ship;
@@ -35,12 +35,12 @@ public class Field {
 
         firstField[i][j].setStyle("-fx-base: lightgreen");
         secondField[i][j].setStyle("-fx-base: lightgreen");
-        firstField[i][j].setMinSize(THIRTY, THIRTY);
-        secondField[i][j].setMinSize(THIRTY, THIRTY);
-        firstField[i][j].setLayoutX(THIRTY * newI);
-        firstField[i][j].setLayoutY(THIRTY * newJ);
-        secondField[i][j].setLayoutX(THIRTY * newI + 500);
-        secondField[i][j].setLayoutY(THIRTY * newJ);
+        firstField[i][j].setMinSize(THIRTY_POSITION, THIRTY_POSITION);
+        secondField[i][j].setMinSize(THIRTY_POSITION, THIRTY_POSITION);
+        firstField[i][j].setLayoutX(THIRTY_POSITION * newI);
+        firstField[i][j].setLayoutY(THIRTY_POSITION * newJ);
+        secondField[i][j].setLayoutX(THIRTY_POSITION * newI + 500);
+        secondField[i][j].setLayoutY(THIRTY_POSITION * newJ);
       }
     }
     if (typeOfField == 1)
@@ -71,10 +71,10 @@ public class Field {
 
       String valueOfchar = String.valueOf(name[i]);
       symbols[i].setText(valueOfchar);
-      symbols[i].setMinSize(FORTY, FORTY);
+      symbols[i].setMinSize(FORTY_POSITION, FORTY_POSITION);
       symbols[i].setLayoutX(32);
       symbols[i].setStyle("-fx-base: lightblue");
-      symbols[i].setLayoutY(FORTY * shift);
+      symbols[i].setLayoutY(FORTY_POSITION * shift);
       shipsAndField.getChildren().addAll(symbols[i]);
     }
 
@@ -102,10 +102,10 @@ public class Field {
       } else {
         numbers[10].setText("10");
       }
-      numbers[i].setMinSize(FORTY, FORTY);
+      numbers[i].setMinSize(FORTY_POSITION, FORTY_POSITION);
       numbers[i].setStyle("-fx-base: lightblue");
       numbers[i].setLayoutY(32);
-      numbers[i].setLayoutX(FORTY * shift);
+      numbers[i].setLayoutX(FORTY_POSITION * shift);
       shipsAndField.getChildren().addAll(numbers[i]);
     }
   }
@@ -134,15 +134,15 @@ public class Field {
 
       String valueOfchar = String.valueOf(name[i]);
       symbols[i].setText(valueOfchar);
-      symbols[i].setMinSize(THIRTY, THIRTY);
+      symbols[i].setMinSize(THIRTY_POSITION, THIRTY_POSITION);
       symbols[i].setLayoutX(15);
       symbols[i].setStyle("-fx-base: lightblue");
-      symbols[i].setLayoutY(THIRTY * shift);
+      symbols[i].setLayoutY(THIRTY_POSITION * shift);
       secondSymbols[i].setText(valueOfchar);
-      secondSymbols[i].setMinSize(THIRTY, THIRTY);
+      secondSymbols[i].setMinSize(THIRTY_POSITION, THIRTY_POSITION);
       secondSymbols[i].setLayoutX(515);
       secondSymbols[i].setStyle("-fx-base: lightblue");
-      secondSymbols[i].setLayoutY(THIRTY * shift);
+      secondSymbols[i].setLayoutY(THIRTY_POSITION * shift);
       battle.getChildren().addAll(symbols[i], secondSymbols[i]);
     }
 
@@ -173,14 +173,14 @@ public class Field {
         numbers[SIZE].setText("10");
         secondNumbers[SIZE].setText("10");
       }
-      numbers[i].setMinSize(THIRTY, THIRTY);
+      numbers[i].setMinSize(THIRTY_POSITION, THIRTY_POSITION);
       numbers[i].setStyle("-fx-base: lightblue");
       numbers[i].setLayoutY(15);
-      numbers[i].setLayoutX(THIRTY * shift);
-      secondNumbers[i].setMinSize(THIRTY, THIRTY);
+      numbers[i].setLayoutX(THIRTY_POSITION * shift);
+      secondNumbers[i].setMinSize(THIRTY_POSITION, THIRTY_POSITION);
       secondNumbers[i].setStyle("-fx-base: lightblue");
       secondNumbers[i].setLayoutY(15);
-      secondNumbers[i].setLayoutX(THIRTY * shift + 500);
+      secondNumbers[i].setLayoutX(THIRTY_POSITION * shift + 500);
       battle.getChildren().addAll(numbers[i], secondNumbers[i]);
     }
   }
