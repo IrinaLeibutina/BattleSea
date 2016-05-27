@@ -2,7 +2,7 @@ package application
 
 import java.util.Map;
 import java.util.ArrayList;
-import java.util.List;
+import scala.collection.immutable.List
 
 class PopularCell {
 
@@ -28,44 +28,25 @@ class PopularCell {
       cell
     }
 
-  def getField(fieldFilling: Array[Int], keysForField: Array[Int], amount: Int): Int =
+  def getField(fieldFilling: Array[Int]): Int =
     {
-      // create an empty map
-      var states = scala.collection.mutable.Map[Int, Int]()
-
-      // Create map with value
-      for (i <- (0).to(amount - 1)) {
-        states += (keysForField(i) -> fieldFilling(i))
-      }
-
-      var field = 0
-      states.toList sortBy (_._2) foreach {
-        case (key, value) =>
-          println(key + " = " + value)
-          field = value
-      }
-      println("Field : " + field)
-      field
+      val field = for (e <- fieldFilling) yield e
+      println("Check = " + field.max + " " + field.size)
+      field.max
     }
 
-  def winsFirstPlayer(winner: Array[Int], amount: Int): Int =
+  def winsFirstPlayer(winner: Array[Int]): Int =
     {
-      var first = 0
-      for (i <- (0).to(amount - 1)) {
-        if (winner(i) == 1) first = first + 1
-      }
-      println("Number of 1 = " + first)
-      first
+      val first = for (e <- winner if e == 1) yield e
+      println("Check = " + first.size)
+      first.size
     }
 
-  def winsSecondPlayer(winner: Array[Int], amount: Int): Int =
+  def winsSecondPlayer(winner: Array[Int]): Int =
     {
-      var second = 0
-      for (i <- (0).to(amount - 1)) {
-        if (winner(i) == 2) second = second + 1
-      }
-      println("Second of 1 = " + second)
-      second
+      val second = for (e <- winner if e == 2) yield e
+      println("Check = " + second.size)
+      second.size
     }
 
   def findMaxSeq(fieldFilling: Array[Array[Array[Int]]], mas1: Array[Int], replays: Int): Array[Int] = {

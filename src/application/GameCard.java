@@ -108,11 +108,11 @@ public class GameCard {
     int firstCell;
     int fullField;
 
-    first = cell.winsFirstPlayer(winner, REPLAYS);
-    second = cell.winsSecondPlayer(winner, REPLAYS);
+    first = cell.winsFirstPlayer(winner);
+    second = cell.winsSecondPlayer(winner);
     getKeys(coordinates);
     firstCell = cell.getCell(coordinates, keysForCoordinates, REPLAYS);
-    fullField = cell.getField(fieldFilling, nameOfGame, REPLAYS);
+    fullField = cell.getField(fieldFilling);
     print(battle, first, second, firstCell, fullField);
   }
 
